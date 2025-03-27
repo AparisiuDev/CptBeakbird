@@ -9,6 +9,10 @@ public class LevelEnterer : MonoBehaviour
     // Checks del trigger y variable del nombre del level
     private bool canEnter;
     private string LevelCol;
+    public float scaleFactor = 1.2f; // Factor de escala al entrar en el trigger
+    public float duration = 0.5f; // Duración del escalado
+
+    private Vector3 originalScale;
 
     private void Update()
     {
@@ -21,6 +25,12 @@ public class LevelEnterer : MonoBehaviour
     {
         //Activar la posibilidad de entrar
         canEnter = true;
+
+        //Hacergrande
+        originalScale = other.transform.localScale;
+        MakeBigger(other);
+
+        //Setear el tp point
         LevelCol = LevelCheck(LevelCol, other);
     }
 
@@ -29,6 +39,9 @@ public class LevelEnterer : MonoBehaviour
         // Reset de todo
         canEnter = false;
         LevelCol = null;
+
+        // Hacer normal again
+        MakeSmaller(other);
     }
 
     private string LevelCheck(string level, Collider other)
@@ -42,5 +55,16 @@ public class LevelEnterer : MonoBehaviour
             level = "Level2Test";
 
         return level;
+    }
+
+    private void MakeBigger(Collider other)
+    {
+        LeanTween.scale(other.gameObject, originalScale * scaleFactor, duration).setEase(LeanTweenType.easeOutElastic);
+        
+    }
+
+    private void MakeSmaller(Collider other)
+    {
+        LeanTween.scale(other.gameObject, originalScale, duration).setEase(LeanTweenType.easeOutElastic);
     }
 }
