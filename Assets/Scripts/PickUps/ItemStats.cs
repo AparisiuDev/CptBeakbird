@@ -8,6 +8,6 @@ public class ItemStats : MonoBehaviour
     public string Name;
     public string Description;
     [Header("Price and Satisfaction")]
-    public float price;
-    public float satisfaction;
+    public float Price;
+    public float Satisfaction;
 }
