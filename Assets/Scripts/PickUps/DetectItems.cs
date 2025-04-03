@@ -11,8 +11,13 @@ public class DetectItems : MonoBehaviour
 
     [Header("Grande Pequeño Variables")]
     public float scaleFactor = 1.1f; // Factor de escala al entrar en el trigger
-    public float duration = 0.5f; // Duración del escalado
+    public float duration = 0.2f; // Duración del escalado
     private Vector3 originalScale;
+
+    // Timers
+    private bool canEnter = true;
+    private float cooldownTime = 0.3f;
+    private float currentCooldownTime = 0f;
 
     private void Start()
     {
@@ -20,6 +25,16 @@ public class DetectItems : MonoBehaviour
 
     private void Update()
     {
+        // If we are on cooldown, update the timer
+        if (currentCooldownTime > 0)
+        {
+            currentCooldownTime -= Time.deltaTime;
+        }
+        else
+        {
+            canEnter = true; // Allow OnTriggerEnter again after cooldown
+        }
+
         // Al inputear E, checkea que este dentro y todo bien, y destruye el item y guarda su valor
         if (waitForE)
         {
@@ -32,18 +47,21 @@ public class DetectItems : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Checkea grab, y se pone en modo espera al input de E
-        if (CheckGrab(other))
+        // Only process the collision if the timer is not running
+        if (canEnter && CheckGrab(other))
         {
             originalScale = other.transform.localScale;
             MakeBigger(other);
             SeeItemStats(other);
             waitForE = true;
+
+            CooldownHandler();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        CooldownHandler();
         // Seguridad de resetear todo en falso y null
         grabInRange = false;
         waitForE = false;
@@ -51,6 +69,13 @@ public class DetectItems : MonoBehaviour
         ItemStats = null;
         // Hacer pequeño el item
         MakeSmaller(other);
+
+    }
+
+    private void CooldownHandler()
+    {
+        currentCooldownTime = cooldownTime;
+        canEnter = false;
     }
 
     // Guardar Item en array y destruir al pulsar la E
@@ -80,7 +105,7 @@ public class DetectItems : MonoBehaviour
     //DEBUG: Ensenar el ultimo nombre y descripcion
     private void DEB_ItemShow()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
             Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Name);
         if (Input.GetKeyDown(KeyCode.T))
             Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Description);
@@ -89,12 +114,12 @@ public class DetectItems : MonoBehaviour
     // Hacer más grande o más pequeño
     private void MakeBigger(Collider other)
     {
-        LeanTween.scale(other.gameObject, originalScale * scaleFactor, duration).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(other.gameObject, originalScale * scaleFactor, duration).setEase(LeanTweenType.easeOutElastic).setEase(LeanTweenType.easeOutBack);
 
     }
     private void MakeSmaller(Collider other)
     {
-        LeanTween.scale(other.gameObject, originalScale, duration).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(other.gameObject, originalScale, duration).setEase(LeanTweenType.easeOutElastic).setEase(LeanTweenType.easeInBack);
     }
 
 }

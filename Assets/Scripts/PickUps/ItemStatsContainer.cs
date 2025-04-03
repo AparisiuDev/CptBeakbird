@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemStatsContainer : MonoBehaviour
 {
     public ItemStats ItemStats;
+    public Vector3 og_scale;
 
    
     [Header("Names and Description")]
@@ -13,15 +14,22 @@ public class ItemStatsContainer : MonoBehaviour
     [Header("Price and Satisfaction")]
     public float Price;
     public float Satisfaction;
+    [Header("Price and Satisfaction")]
+    public GameObject Model;
 
     private void Start()
     {
+        og_scale = this.gameObject.transform.localScale;
+
         ItemStats = new ItemStats
         {
             Name = Name,
             Description = Description,
             Price = Price,
-            Satisfaction = Satisfaction
+            Satisfaction = Satisfaction,
+            Model = Model
         };
+
+        
     }
 }
