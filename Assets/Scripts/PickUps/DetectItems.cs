@@ -6,14 +6,16 @@ public class DetectItems : MonoBehaviour
 {
     private bool grabInRange = false;
     private bool waitForE = false;
-    private ItemStats ItemStats;
+    private ItemStatsContainer ItemStats;
     GameObject itemObj;
-    // Lista para guardar toda la info de los items
-    public List<ItemStats> Inventory = new List<ItemStats>();
+
+    [Header("Grande Pequeño Variables")]
+    public float scaleFactor = 1.1f; // Factor de escala al entrar en el trigger
+    public float duration = 0.5f; // Duración del escalado
+    private Vector3 originalScale;
 
     private void Start()
     {
-        ItemStats = GetComponent<ItemStats>();
     }
 
     private void Update()
@@ -21,7 +23,7 @@ public class DetectItems : MonoBehaviour
         // Al inputear E, checkea que este dentro y todo bien, y destruye el item y guarda su valor
         if (waitForE)
         {
-            StoreItem(ItemStats);
+            StoreItem(ItemStats.ItemStats);
         }
 
         DEB_ItemShow();
@@ -33,6 +35,8 @@ public class DetectItems : MonoBehaviour
         // Checkea grab, y se pone en modo espera al input de E
         if (CheckGrab(other))
         {
+            originalScale = other.transform.localScale;
+            MakeBigger(other);
             SeeItemStats(other);
             waitForE = true;
         }
@@ -45,14 +49,16 @@ public class DetectItems : MonoBehaviour
         waitForE = false;
         itemObj = null;
         ItemStats = null;
+        // Hacer pequeño el item
+        MakeSmaller(other);
     }
 
     // Guardar Item en array y destruir al pulsar la E
     private void StoreItem(ItemStats NextItem)
     {
-        if (ItemStats != null && itemObj != null && Input.GetKeyDown(KeyCode.E))
+        if (itemObj != null && Input.GetKeyDown(KeyCode.E))
         {
-            Inventory.Add(NextItem);
+            Inventory.instance.backpack.Add(NextItem);
             itemObj.SetActive(false);
         }
     }
@@ -68,15 +74,27 @@ public class DetectItems : MonoBehaviour
     private void SeeItemStats(Collider other)
     {
         itemObj = other.gameObject;
-        ItemStats = itemObj.GetComponent<ItemStats>();
+        ItemStats = itemObj.GetComponent<ItemStatsContainer>();
     }
 
     //DEBUG: Ensenar el ultimo nombre y descripcion
     private void DEB_ItemShow()
     {
         if(Input.GetKeyDown(KeyCode.R))
-            Debug.Log(Inventory[Inventory.Count - 1].Name);
+            Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Name);
         if (Input.GetKeyDown(KeyCode.T))
-            Debug.Log(Inventory[Inventory.Count - 1].Description);
+            Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Description);
     }
+
+    // Hacer más grande o más pequeño
+    private void MakeBigger(Collider other)
+    {
+        LeanTween.scale(other.gameObject, originalScale * scaleFactor, duration).setEase(LeanTweenType.easeOutElastic);
+
+    }
+    private void MakeSmaller(Collider other)
+    {
+        LeanTween.scale(other.gameObject, originalScale, duration).setEase(LeanTweenType.easeOutElastic);
+    }
+
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemStats : MonoBehaviour
+public struct ItemStats
 {
     [Header("Names and Description")]
     public string Name;

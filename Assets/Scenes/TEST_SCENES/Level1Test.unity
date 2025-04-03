@@ -694,7 +694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462487688c92f5a4c99935b25dbaff80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory: []
+  scaleFactor: 1.1
+  duration: 0.5
 --- !u!135 &817698076
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1007,8 +1008,8 @@ GameObject:
   - component: {fileID: 1829705675}
   - component: {fileID: 1829705674}
   - component: {fileID: 1829705679}
-  - component: {fileID: 1829705678}
   - component: {fileID: 1829705680}
+  - component: {fileID: 1829705681}
   m_Layer: 0
   m_Name: ItemRobable
   m_TagString: Items
@@ -1102,22 +1103,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1829705678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829705673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee412990c5abcdb4c8cd6923c5eb40aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Cuboide
-  Description: Un coboide lmao
-  Price: 20
-  Satisfaction: 50
 --- !u!65 &1829705679
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1166,6 +1151,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1829705681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829705673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a69224c2b17dc14bb9c1cea4ee5a3aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: cubo mini
+  Description: es mini
+  Price: 0
+  Satisfaction: 0
 --- !u!1 &1957589275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,8 +1375,8 @@ GameObject:
   - component: {fileID: 2132736569}
   - component: {fileID: 2132736568}
   - component: {fileID: 2132736567}
-  - component: {fileID: 2132736566}
   - component: {fileID: 2132736565}
+  - component: {fileID: 2132736572}
   m_Layer: 0
   m_Name: ItemRobable (1)
   m_TagString: Items
@@ -1410,22 +1411,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2132736566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132736564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee412990c5abcdb4c8cd6923c5eb40aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Rectanguloide
-  Description: Un rectanguloide lmao
-  Price: 40
-  Satisfaction: 60
 --- !u!65 &2132736567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1533,6 +1518,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 56.946, z: 0}
+--- !u!114 &2132736572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132736564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a69224c2b17dc14bb9c1cea4ee5a3aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: grandoide
+  Description: es grande
+  Price: 0
+  Satisfaction: 0
 --- !u!1001 &1818304136051809856
 PrefabInstance:
   m_ObjectHideFlags: 0
