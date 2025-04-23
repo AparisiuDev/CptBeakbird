@@ -31,5 +31,15 @@ public class Inventory : MonoBehaviour
                 Debug.Log(itemStats.Name);
             }
         }
+
+        DEB_ItemShow();
+    }
+
+    private void DEB_ItemShow()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Name);
+        if (Input.GetKeyDown(KeyCode.T))
+            Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Description);
     }
 }

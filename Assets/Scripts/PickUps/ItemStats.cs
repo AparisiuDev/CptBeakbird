@@ -10,6 +10,6 @@ public struct ItemStats
     [Header("Price and Satisfaction")]
     public float Price;
     public float Satisfaction;
-    [Header("Price and Satisfaction")]
+    [Header("3D Model")]
     public GameObject Model;
 }

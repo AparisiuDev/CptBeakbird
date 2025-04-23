@@ -41,8 +41,6 @@ public class DetectItems : MonoBehaviour
             StoreItem(ItemStats.ItemStats);
         }
 
-        DEB_ItemShow();
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,15 +100,7 @@ public class DetectItems : MonoBehaviour
         ItemStats = itemObj.GetComponent<ItemStatsContainer>();
     }
 
-    //DEBUG: Ensenar el ultimo nombre y descripcion
-    private void DEB_ItemShow()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Name);
-        if (Input.GetKeyDown(KeyCode.T))
-            Debug.Log(Inventory.instance.backpack[Inventory.instance.backpack.Count - 1].Description);
-    }
-
+    
     // Hacer más grande o más pequeño
     private void MakeBigger(Collider other)
     {

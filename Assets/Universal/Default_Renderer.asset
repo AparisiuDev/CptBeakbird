@@ -60,7 +60,9 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 3727297970800415559}
   - {fileID: -5925591449662112248}
-  m_RendererFeatureMap: 47d397a1c105ba33083eccbef811c4ad
+  - {fileID: 1035318116404369226}
+  - {fileID: 8919139370343306733}
+  m_RendererFeatureMap: 47d397a1c105ba33083eccbef811c4ad4a17cf6d57305e0eed95836f0026c77b
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -82,10 +84,10 @@ MonoBehaviour:
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 631
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 631
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
@@ -99,6 +101,38 @@ MonoBehaviour:
   m_CopyDepthMode: 1
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &1035318116404369226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b385900de7ea64c984da234ec1ad8c, type: 3}
+  m_Name: ScreenSpaceOutlines
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  renderPassEvent: 300
+  outlinesLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  outlineSettings:
+    outlineColor: {r: 0, g: 0, b: 0, a: 1}
+    outlineScale: 0.57
+    depthThreshold: 1.5
+    robertsCrossMultiplier: 100
+    normalThreshold: 0.4
+    steepAngleThreshold: 0.2
+    steepAngleMultiplier: 25
+    colorFormat: 0
+    depthBufferBits: 0
+    filterMode: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    perObjectData: 0
+    enableDynamicBatching: 0
+    enableInstancing: 0
 --- !u!114 &3727297970800415559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,3 +175,35 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &8919139370343306733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b385900de7ea64c984da234ec1ad8c, type: 3}
+  m_Name: ObjectOutlines
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  renderPassEvent: 300
+  outlinesLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  outlineSettings:
+    outlineColor: {r: 0, g: 0, b: 0, a: 1}
+    outlineScale: 1.31
+    depthThreshold: 100
+    robertsCrossMultiplier: 33
+    normalThreshold: 0.4
+    steepAngleThreshold: 0.2
+    steepAngleMultiplier: 25
+    colorFormat: 0
+    depthBufferBits: 0
+    filterMode: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    perObjectData: 0
+    enableDynamicBatching: 0
+    enableInstancing: 0
