@@ -7,6 +7,7 @@ public class TowerDetectorMultiRay : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private int numberOfRays = 5;
     [SerializeField] private float fieldOfView = 45f;
+    [SerializeField] private float rayLength = 20f; // NUEVA VARIABLE MODIFICABLE
 
     public bool canSeePlayer = false;
 
@@ -23,6 +24,7 @@ public class TowerDetectorMultiRay : MonoBehaviour
 
     public int NumberOfRays => numberOfRays;
     public float FieldOfView => fieldOfView;
+    public float RayLength => rayLength;
     public LayerMask LayerMask => layerMask;
     public RayInfo[] RayInfos => rayInfos;
 
@@ -37,8 +39,8 @@ public class TowerDetectorMultiRay : MonoBehaviour
         float startAngle = -fieldOfView / 2;
 
         canSeePlayer = false;
-        
-        for(int i = 0; i < numberOfRays; i++)
+
+        for (int i = 0; i < numberOfRays; i++)
         {
             float angle = startAngle + (angleStep * i);
             Vector3 direction = Quaternion.Euler(0, angle, 0) * transform.forward;
@@ -48,33 +50,26 @@ public class TowerDetectorMultiRay : MonoBehaviour
             rayInfos[i].direction = direction;
             rayInfos[i].hitSomething = false;
             rayInfos[i].hitPlayer = false;
-            rayInfos[i].hitDistance = 1000f;
-            rayInfos[i].hitPoint = transform.position + direction * 1000f;
+            rayInfos[i].hitDistance = rayLength;
+            rayInfos[i].hitPoint = transform.position + direction * rayLength;
 
-
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, layerMask))
+            if (Physics.Raycast(transform.position, direction, out hit, rayLength, layerMask))
             {
                 rayInfos[i].hitSomething = true;
                 rayInfos[i].hitPoint = hit.point;
                 rayInfos[i].hitDistance = hit.distance;
 
                 Debug.DrawRay(transform.position, direction * hit.distance, Color.yellow);
-                if (hit.collider.gameObject.CompareTag("Player"))
+                if (hit.collider.CompareTag("Player"))
                 {
                     canSeePlayer = true;
                     rayInfos[i].hitPlayer = true;
                 }
-
             }
             else
             {
-
-                Debug.DrawRay(transform.position, direction * 1000, Color.white);
-
+                Debug.DrawRay(transform.position, direction * rayLength, Color.white);
             }
         }
-        
-
     }
 }
