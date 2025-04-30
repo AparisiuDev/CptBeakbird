@@ -8,12 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Effect Material
-  m_Shader: {fileID: -6465566751694194690, guid: f968e7540d632cc40b5ca8b340a3e718,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: f968e7540d632cc40b5ca8b340a3e718, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - OUTLINE_USE_COLOR
+  - OUTLINE_USE_DEPTH
   - OUTLINE_USE_NORMALS
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -50,9 +50,8 @@ Material:
     - _NormalThresholdMin: 0
     - _Thickness: 1
     m_Colors:
-    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeColor: {r: 0, g: 0, b: 0, a: 0.4117647}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,13 +64,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130791d3e20646d2b6d81688877b0909, type: 3}
   m_Name: '[FlatKit] Example Outline Settings'
   m_EditorClassIdentifier: 
-  edgeColor: {r: 1, g: 1, b: 1, a: 1}
+  edgeColor: {r: 0, g: 0, b: 0, a: 0.4117647}
   thickness: 1
   resolutionInvariant: 0
   fadeWithDistance: 0
   fadeRangeStart: 10
   fadeRangeEnd: 50
-  useDepth: 0
+  useDepth: 1
   minDepthThreshold: 0.1
   maxDepthThreshold: 0.1
   useNormals: 1
@@ -80,7 +79,7 @@ MonoBehaviour:
   useColor: 1
   minColorThreshold: 0
   maxColorThreshold: 0.25
-  renderEvent: 500
+  renderEvent: 300
   outlineOnly: 0
   applyInSceneView: 1
   effectMaterial: {fileID: -3130267085085746722}
