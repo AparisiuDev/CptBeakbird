@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     private CharacterController controller;
+    public InventoryManager inventoryManager;
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 5f;
@@ -97,7 +98,7 @@ public class PlayerController : MonoBehaviour
         if (move != Vector3.zero)
         {
             toRotation = Quaternion.LookRotation(move, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * inventoryManager.SlowDown);
         }
     }
 
