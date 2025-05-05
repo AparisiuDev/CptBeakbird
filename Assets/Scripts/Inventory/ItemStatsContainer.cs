@@ -14,8 +14,8 @@ public class ItemStatsContainer : MonoBehaviour
     [Header("Price and Satisfaction")]
     public float Price;
     public float Satisfaction;
-    [Header("Price and Satisfaction")]
-    public GameObject Model;
+    [Header("Model")]
+    public Sprite Model;
 
     private void Start()
     {

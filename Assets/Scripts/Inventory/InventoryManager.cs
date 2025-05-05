@@ -5,9 +5,12 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
+    [Header("NO TOCAR / PREGUNTAR AL BIEL")]
     public float SlowDownScaleFactor = 0.3f;
     public float SlowDown;
     private bool menuActivated;
+
+    public ItemSlot[] ItemSlot;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,7 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         ToggleMenu();
+        AddItem();
     }
     
     void ToggleMenu()
@@ -37,6 +41,18 @@ public class InventoryManager : MonoBehaviour
             InventoryMenu.SetActive(true);
             menuActivated = true;
 
+        }
+    }
+
+    void AddItem()
+    {
+        for (int i = 0 ; i < Inventory.instance.backpack.Count; i++)
+        {
+            if (ItemSlot[i].isFull == false) 
+            {
+                ItemSlot[i].AddItem(Inventory.instance.backpack[i].Name, Inventory.instance.backpack[i].Description, Inventory.instance.backpack[i].Model);
+                return;
+            }
         }
     }
 }
