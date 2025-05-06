@@ -1,5 +1,10 @@
 {
   "dependencies": {
+<<<<<<< Updated upstream
+=======
+    "com.unity.2d.sprite": "1.0.0",
+    "com.unity.ai.navigation": "1.1.6",
+>>>>>>> Stashed changes
     "com.unity.cinemachine": "2.9.7",
     "com.unity.feature.development": "1.0.1",
     "com.unity.textmeshpro": "3.0.6",
