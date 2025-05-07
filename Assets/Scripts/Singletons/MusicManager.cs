@@ -70,13 +70,6 @@ public class MusicManager : MonoBehaviour
             case "Level2Test":
                 ChangeMusic(level2Music);
                 break;
-            case "Level3Test":
-                ChangeMusic(level2Music);
-                break;
-            case "Level4Test":
-                ChangeMusic(level2Music);
-                break;
-
             default:
                 break;
         }
