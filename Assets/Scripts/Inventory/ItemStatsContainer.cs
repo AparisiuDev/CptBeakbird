@@ -30,6 +30,5 @@ public class ItemStatsContainer : MonoBehaviour
             Model = Model
         };
 
-        
     }
 }

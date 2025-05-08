@@ -1,0 +1,3 @@
+slot1name=Banana
+slot2name=Chair
+slot3name=Apple

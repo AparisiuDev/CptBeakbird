@@ -17,9 +17,8 @@ public class ItemSlot : MonoBehaviour
 
     [SerializeField] Image itemModel;
 
-    public void AddItem(string Name, string Description, Sprite Model)
+    public void AddItem(string Description, Sprite Model)
     {
-        this.itemName = Name;
         this.description = Description;
         this.model = Model;
         isFull = true;

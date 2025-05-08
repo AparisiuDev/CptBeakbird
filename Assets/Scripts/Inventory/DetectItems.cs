@@ -6,6 +6,7 @@ public class DetectItems : MonoBehaviour
 {
     private bool grabInRange = false;
     private bool waitForE = false;
+    private bool isAdded;
     private ItemStatsContainer ItemStats;
     GameObject itemObj;
 
@@ -79,10 +80,20 @@ public class DetectItems : MonoBehaviour
     // Guardar Item en array y destruir al pulsar la E
     private void StoreItem(ItemStats NextItem)
     {
+        isAdded = false;
         if (itemObj != null && Input.GetKeyDown(KeyCode.E))
-        {
-            Inventory.instance.backpack.Add(NextItem);
+        { 
+            //Check if already added
+            for (int i = 0; i < Inventory.instance.backpack.Count; i++) 
+                if (Inventory.instance.backpack[i].Name == NextItem.Name) isAdded = true;
+
+            // Add and disable object
+            if (!isAdded) Inventory.instance.backpack.Add(NextItem);
             itemObj.SetActive(false);
+            grabInRange = false;
+            waitForE = false;
+            itemObj = null;
+            ItemStats = null;
         }
     }
 

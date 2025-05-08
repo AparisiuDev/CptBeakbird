@@ -20,13 +20,14 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Inventory.instance.backpack.Count);
         ToggleMenu();
         AddItem();
     }
     
     void ToggleMenu()
     {
-        if (Input.GetKeyDown(KeyCode.I) && menuActivated)
+        if (Input.GetKeyDown(KeyCode.Tab) && menuActivated)
         {
             SlowDown = 1f;
             Time.timeScale = SlowDown;
@@ -34,7 +35,7 @@ public class InventoryManager : MonoBehaviour
             menuActivated = false;
         }
 
-        else if (Input.GetKeyDown(KeyCode.I) && !menuActivated)
+        else if (Input.GetKeyDown(KeyCode.Tab) && !menuActivated)
         {
             SlowDown = SlowDownScaleFactor;
             Time.timeScale = SlowDown;
@@ -48,10 +49,11 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0 ; i < Inventory.instance.backpack.Count; i++)
         {
-            if (ItemSlot[i].isFull == false) 
-            {
-                ItemSlot[i].AddItem(Inventory.instance.backpack[i].Name, Inventory.instance.backpack[i].Description, Inventory.instance.backpack[i].Model);
-                return;
+            if (ItemSlot[i].isFull == false)
+            { 
+                ItemSlot[i].AddItem(Inventory.instance.backpack[i].Description, Inventory.instance.backpack[i].Model);
+                //Inventory.instance.backpack[i].isAdded = true;
+                    return;
             }
         }
     }

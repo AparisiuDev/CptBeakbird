@@ -12,4 +12,5 @@ public struct ItemStats
     public float Satisfaction;
     [Header("Model")]
     public Sprite Model;
+
 }
