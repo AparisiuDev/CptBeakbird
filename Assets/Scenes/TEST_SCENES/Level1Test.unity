@@ -7250,8 +7250,16 @@ PrefabInstance:
       value: Sea
       objectReference: {fileID: 0}
     - target: {fileID: 6630236505716261944, guid: f60d74d949c60d946a645b5e9d0ee901, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630236505716261944, guid: f60d74d949c60d946a645b5e9d0ee901, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630236505716261944, guid: f60d74d949c60d946a645b5e9d0ee901, type: 3}
+      propertyPath: m_TagString
+      value: Sea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7372,6 +7380,10 @@ PrefabInstance:
     - target: {fileID: 1776426211014998595, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622809364525559456, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: Name

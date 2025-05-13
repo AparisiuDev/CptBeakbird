@@ -62,7 +62,7 @@ Material:
     - _ShadowStrength: 0.35
     - _WaterClearness: 0.3
     - _WaterDepth: 5
-    - _WaveAmplitude: 0.25
+    - _WaveAmplitude: 0.1
     - _WaveDirection: 0
     - _WaveFrequency: 1
     - _WaveMode: 1
@@ -74,3 +74,4 @@ Material:
     - _CrestColor: {r: 1, g: 1, b: 1, a: 0.9}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
