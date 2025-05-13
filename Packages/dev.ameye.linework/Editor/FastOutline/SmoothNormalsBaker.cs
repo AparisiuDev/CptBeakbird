@@ -23,7 +23,7 @@ namespace Linework.Editor.FastOutline
 #if HAS_PACKAGE_UNITY_COLLECTIONS_2_1_0_EXP_4
             var smoothedNormalsMap = new UnsafeParallelHashMap<Vector3, Vector3>(vertexCount, Allocator.Persistent);
 #else
-            var smoothedNormalsMap = new UnsafeHashMap<Vector3, Vector3>(vertexCount, Allocator.Persistent);
+            var smoothedNormalsMap = new UnsafeParallelHashMap<Vector3, Vector3>(vertexCount, Allocator.Persistent);
 #endif
             for (var i = 0; i < vertexCount; i++)
             {
@@ -64,7 +64,7 @@ namespace Linework.Editor.FastOutline
 #if HAS_PACKAGE_UNITY_COLLECTIONS_2_1_0_EXP_4
             [ReadOnly] public UnsafeParallelHashMap<Vector3, Vector3> smoothedNormals;
 #else
-              [ReadOnly] public UnsafeHashMap<Vector3, Vector3> smoothedNormals;
+              [ReadOnly] public UnsafeParallelHashMap<Vector3, Vector3> smoothedNormals;
 #endif
             [WriteOnly] public NativeArray<Vector2> bakedNormals;
 
@@ -75,7 +75,7 @@ namespace Linework.Editor.FastOutline
 #if HAS_PACKAGE_UNITY_COLLECTIONS_2_1_0_EXP_4
                 UnsafeParallelHashMap<Vector3, Vector3> smoothedNormals,
 #else
-                  UnsafeHashMap<Vector3, Vector3> smoothedNormals,
+                  UnsafeParallelHashMap<Vector3, Vector3> smoothedNormals,
 #endif
                 NativeArray<Vector2> bakedNormals)
             {

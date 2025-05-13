@@ -50,11 +50,20 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0 ; i < Inventory.instance.backpack.Count; i++)
         {
             if (ItemSlot[i].isFull == false)
-            { 
-                ItemSlot[i].AddItem(Inventory.instance.backpack[i].Description, Inventory.instance.backpack[i].Model);
+            {
+                ItemSlot[i].AddItem(Inventory.instance.backpack[i].Name,Inventory.instance.backpack[i].Description, Inventory.instance.backpack[i].Model);
                 //Inventory.instance.backpack[i].isAdded = true;
                     return;
             }
+        }
+    }
+
+    public void DeselectAllSlots()
+    {
+        for (int i = 0; i < ItemSlot.Length; i++)
+        {
+            ItemSlot[i].selectedShader.SetActive(false);
+            ItemSlot[i].thisItemSelected = false;
         }
     }
 }
