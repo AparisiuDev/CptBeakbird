@@ -83,12 +83,9 @@ public class GuardAttack : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(attackPoint != null)
-        {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
             Gizmos.color = new Color(1, 0, 0, 0.3f);
             Gizmos.DrawSphere(attackPoint.position, attackRadius);
-        }
     }
 }
