@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class GuardMovement : MonoBehaviour
 {
     public Transform[] waypoints;
-    public TowerDetectorMultiRay towerDetectorMultiRay;
+    //public TowerDetectorMultiRay towerDetectorMultiRay;
+    private VisionConica visionConica;
     public Transform player;
 
 
@@ -31,6 +32,7 @@ public class GuardMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        visionConica = GetComponent<VisionConica>();
         agent = GetComponent<NavMeshAgent>();
 
         //Si existen suficientes waypoints asingamos uno
@@ -60,7 +62,7 @@ public class GuardMovement : MonoBehaviour
     private void Patrol() {
 
         //Si vemos al jugador
-        if(towerDetectorMultiRay != null && towerDetectorMultiRay.canSeePlayer)
+        if(visionConica != null && visionConica.canSeePlayer)
         {
             //Paramos el agente y cambiamos el estado a parado
             currentState = State.Stopping; 
@@ -77,7 +79,7 @@ public class GuardMovement : MonoBehaviour
         }
     }
     private void StopAndObserve() {
-        if (towerDetectorMultiRay != null && towerDetectorMultiRay.canSeePlayer)
+        if (visionConica != null && visionConica.canSeePlayer)
         {
             stopTimer += Time.deltaTime;
             if(stopTimer >= stopDuration)
@@ -95,7 +97,7 @@ public class GuardMovement : MonoBehaviour
         }
     }
     private void Chase() {
-        if(towerDetectorMultiRay != null && towerDetectorMultiRay.canSeePlayer)
+        if(visionConica != null && visionConica.canSeePlayer)
         {
             timeSinceLastSeen = Time.time;
             agent.SetDestination(player.position);

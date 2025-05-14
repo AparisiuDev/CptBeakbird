@@ -8,6 +8,7 @@ TagManager:
   - Level2
   - Items
   - Sea
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - EnemiesOutlines
   - Player
   - Sea
-  - 
+  - Wall
   - 
   - 
   - 
