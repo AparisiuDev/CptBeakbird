@@ -69,7 +69,7 @@ Material:
     - _WaveNoise: 0.25
     - _WaveSpeed: 0.5
     m_Colors:
-    - _ColorDeep: {r: 0.65, g: 0.9, b: 1, a: 1}
+    - _ColorDeep: {r: 0.58431375, g: 0.7764706, b: 0.8490566, a: 1}
     - _ColorShallow: {r: 0.35, g: 0.6, b: 0.75, a: 0.8}
     - _CrestColor: {r: 1, g: 1, b: 1, a: 0.9}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}

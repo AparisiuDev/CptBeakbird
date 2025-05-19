@@ -8,10 +8,20 @@ public class VisionConica : MonoBehaviour
     public LayerMask capaObjetivo;           // Quines capes poden ser detectades
     public LayerMask capaObstaculos;         // Quines capes bloquegen la visió
     public bool canSeePlayer;
+    public DetectItems detectItems;
+    public Transform player;
 
     [Header("Debug")]
     public bool mostrarGizmos = true;
 
+    private void Start()
+    {
+        /*** DEBUG
+        estilo = new GUIStyle();
+        estilo.fontSize = 32;
+        estilo.normal.textColor = Color.black;
+        ***/
+    }
     /// <summary>
     /// Comprova si un objectiu està dins del con de visió i sense obstacles.
     /// </summary>
@@ -41,21 +51,18 @@ public class VisionConica : MonoBehaviour
     }
 
     // Exemple d'ús: detectar si un objectiu està dins de la zona de visió
-    void Update()
+    void FixedUpdate()
     {
-        // Busquem tots els objectius dins de la distància màxima
-        Collider[] objetivos = Physics.OverlapSphere(transform.position, distanciaVision, capaObjetivo);
-        foreach (var objetivo in objetivos)
+        if (!EstaEnZonaDeVision(player)) return;
+        // Comprovem si cada objectiu està dins del con de visió
+        if (detectItems.hasStolenPublic)
         {
-            // Comprovem si cada objectiu està dins del con de visió
-            if (EstaEnZonaDeVision(objetivo.transform))
-            {
-                canSeePlayer = true;
-                //Debug.Log("Objectiu detectat: " + objetivo.name + "!");
-                // Aquí pots posar la lògica de reacció del personatge
-            } else canSeePlayer = false;
-
+            canSeePlayer = true;
+            //Debug.Log("Objectiu detectat: " + objetivo.name + "!");
         }
+        else canSeePlayer = false;
+        // Busquem tots els objectius dins de la distància màxima
+        
     }
 
     // Visualització del con a l'escena
@@ -72,4 +79,12 @@ public class VisionConica : MonoBehaviour
         // Dibuixem una esfera per indicar la distància màxima
         Gizmos.DrawWireSphere(transform.position, distanciaVision);
     }
-}
+
+    /*** DEBUG
+    private GUIStyle estilo;
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 40, 200, 30), "EstaEnZonaDeVision: " + EstaEnZonaDeVision(player).ToString(), estilo);
+    }
+    ***/
+    }

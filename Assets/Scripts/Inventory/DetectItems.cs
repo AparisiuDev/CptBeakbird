@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using UnityEngine;
 
 public class DetectItems : MonoBehaviour
@@ -7,6 +8,7 @@ public class DetectItems : MonoBehaviour
     private bool grabInRange = false;
     private bool waitForE = false;
     private bool isAdded;
+    public bool hasStolenPublic;
     private ItemStatsContainer ItemStats;
     GameObject itemObj;
 
@@ -19,13 +21,21 @@ public class DetectItems : MonoBehaviour
     private bool canEnter = true;
     private float cooldownTime = 0.3f;
     private float currentCooldownTime = 0f;
+    private float stolenTimer;
+    private bool timerActive = false;
 
     private void Start()
     {
+        /***DEBUG
+        estilo = new GUIStyle();
+        estilo.fontSize = 32;
+        estilo.normal.textColor = Color.black;
+        ***/ 
     }
 
     private void Update()
     {
+        timerStolen();
         // If we are on cooldown, update the timer
         if (currentCooldownTime > 0)
         {
@@ -82,7 +92,12 @@ public class DetectItems : MonoBehaviour
     {
         isAdded = false;
         if (itemObj != null && Input.GetKeyDown(KeyCode.E))
-        { 
+        {
+            stolenTimer = 3f;
+
+            hasStolenPublic = true;
+            timerActive = true;
+
             //Check if already added
             for (int i = 0; i < Inventory.instance.backpack.Count; i++) 
                 if (Inventory.instance.backpack[i].Name == NextItem.Name) isAdded = true;
@@ -123,4 +138,28 @@ public class DetectItems : MonoBehaviour
         LeanTween.scale(other.gameObject, originalScale, duration).setEase(LeanTweenType.easeOutElastic).setEase(LeanTweenType.easeInBack);
     }
 
+    private void justStolenItem(float duration)
+    {
+        hasStolenPublic = true;
+        timerActive = true;
+    }
+    private void timerStolen()
+    {
+        if (hasStolenPublic)
+        {
+            stolenTimer -= Time.deltaTime;
+            if(stolenTimer <= 0f)
+            {
+                hasStolenPublic = false;
+            }
+        }
+    }
+
+    /***DEBUG
+    private GUIStyle estilo;
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 200, 30), "hasStolenPublic: " + hasStolenPublic.ToString(), estilo); 
+    }
+    ***/
 }
