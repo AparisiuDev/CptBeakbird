@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Inventory.instance.backpack.Count);
+        //Debug.Log(Inventory.instance.backpack.Count);
         ToggleMenu();
         AddItem();
     }

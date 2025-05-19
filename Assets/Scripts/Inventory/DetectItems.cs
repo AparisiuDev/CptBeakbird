@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DetectItems : MonoBehaviour
 {
@@ -24,17 +25,34 @@ public class DetectItems : MonoBehaviour
     private float stolenTimer;
     private bool timerActive = false;
 
+    [Header("UI")]
+    //Cooldown when getting items
+    public KeyCode grabItemKey = KeyCode.E;
+    public float segundosNecesarios;  // Tiempo que debe mantenerse pulsado
+    private float tiempoPresionado = 0f;
+    private bool accionEjecutada = false;
+    // Slider
+    public Slider Slider;
+    private CanvasGroup canvasGroup;
+    [SerializeField] private float fadeDuration = 1f;
+    private float targetAlpha = 1f; // Default is fully visible
+    [SerializeField] private float fadeSpeed = 1f;
+
+
     private void Start()
     {
         /***DEBUG
         estilo = new GUIStyle();
         estilo.fontSize = 32;
         estilo.normal.textColor = Color.black;
-        ***/ 
+        ***/
+        canvasGroup = Slider.GetComponent<CanvasGroup>();
     }
+
 
     private void Update()
     {
+        FadeManager();
         timerStolen();
         // If we are on cooldown, update the timer
         if (currentCooldownTime > 0)
@@ -49,9 +67,30 @@ public class DetectItems : MonoBehaviour
         // Al inputear E, checkea que este dentro y todo bien, y destruye el item y guarda su valor
         if (waitForE)
         {
-            StoreItem(ItemStats.ItemStats);
+            if (Input.GetKey(grabItemKey))
+            {
+                if (!accionEjecutada)
+                {
+                    FadeIn();
+                    tiempoPresionado += Time.deltaTime;
+                    Slider.value = tiempoPresionado / segundosNecesarios;
+                    if (tiempoPresionado >= segundosNecesarios)
+                    {
+                        FadeOut();
+                        StoreItem(ItemStats.ItemStats);
+                        accionEjecutada = true;
+                    }
+                }
+            }
         }
-
+        else
+        {
+            // Si se suelta la tecla antes del tiempo, reinicia
+            tiempoPresionado = 0f;
+            accionEjecutada = false;
+            Slider.value = Mathf.MoveTowards(Slider.value, 0f, 0.5f * Time.deltaTime);
+            if (Slider.value <= 0f) FadeOut();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -91,7 +130,7 @@ public class DetectItems : MonoBehaviour
     private void StoreItem(ItemStats NextItem)
     {
         isAdded = false;
-        if (itemObj != null && Input.GetKeyDown(KeyCode.E))
+        if (itemObj != null /***&& Input.GetKeyDown(KeyCode.E)***/)
         {
             stolenTimer = 3f;
 
@@ -122,6 +161,8 @@ public class DetectItems : MonoBehaviour
     // Guardar en una variable la info del item
     private void SeeItemStats(Collider other)
     {
+        segundosNecesarios = other.GetComponent<ItemStatsContainer>().timeToGrab;
+
         itemObj = other.gameObject;
         ItemStats = itemObj.GetComponent<ItemStatsContainer>();
     }
@@ -153,6 +194,28 @@ public class DetectItems : MonoBehaviour
                 hasStolenPublic = false;
             }
         }
+    }
+
+    public void FadeManager()
+    {
+        // Smoothly move current alpha toward target alpha
+        if (!Mathf.Approximately(canvasGroup.alpha, targetAlpha))
+        {
+            canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, fadeSpeed * Time.deltaTime);
+        }
+    }
+    public void FadeIn()
+    {
+        targetAlpha = 1f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    public void FadeOut()
+    {
+        targetAlpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     /***DEBUG

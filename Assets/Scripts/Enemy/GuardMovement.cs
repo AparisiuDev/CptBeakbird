@@ -97,8 +97,9 @@ public class GuardMovement : MonoBehaviour
         }
     }
     private void Chase() {
-        if(visionConica != null && visionConica.canSeePlayer)
+        if(visionConica != null && (visionConica.canSeePlayer || visionConica.activeChase))
         {
+            visionConica.activeChase = true;
             timeSinceLastSeen = Time.time;
             agent.SetDestination(player.position);
         }

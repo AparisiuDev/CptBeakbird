@@ -8,6 +8,7 @@ public class VisionConica : MonoBehaviour
     public LayerMask capaObjetivo;           // Quines capes poden ser detectades
     public LayerMask capaObstaculos;         // Quines capes bloquegen la visió
     public bool canSeePlayer;
+    public bool activeChase;
     public DetectItems detectItems;
     public Transform player;
 
@@ -53,7 +54,11 @@ public class VisionConica : MonoBehaviour
     // Exemple d'ús: detectar si un objectiu està dins de la zona de visió
     void FixedUpdate()
     {
-        if (!EstaEnZonaDeVision(player)) return;
+        if (!EstaEnZonaDeVision(player))
+        {
+            activeChase = false;
+            return;
+        }
         // Comprovem si cada objectiu està dins del con de visió
         if (detectItems.hasStolenPublic)
         {
