@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Animations;
 
 public class PlayerController : MonoBehaviour
 {
@@ -73,10 +74,27 @@ public class PlayerController : MonoBehaviour
 
         // Movement speed based on sprinting status
         float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
-
+        
         // Apply movement based on input and camera direction (no Y-axis)
         Vector3 horizontalMove = move * currentSpeed;
         horizontalMove.y = 0;
+
+        /*** Manager Animations ***/
+        if (!isSprinting && horizontalMove != Vector3.zero)
+        {
+            Animations.AnimatorManager.myAnimator.SetBool("isWalking", true);
+            Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
+        }
+        if (isSprinting && horizontalMove != Vector3.zero)
+        {
+            Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
+            Animations.AnimatorManager.myAnimator.SetBool("isRunning", true);
+        }
+        else if (horizontalMove == Vector3.zero)
+        {
+            Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
+            Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
+        }
 
         // Apply gravity
         if (isGrounded && velocity.y < 0)
