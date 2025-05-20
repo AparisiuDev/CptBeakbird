@@ -63,8 +63,8 @@ ModelImporter:
       name: Armature.001|CAMINAR
       takeName: Armature.001|CAMINAR
       internalID: -2529584883525555409
-      firstFrame: 0
-      lastFrame: 194
+      firstFrame: 4
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -72,7 +72,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -121,8 +121,8 @@ ModelImporter:
       name: Armature.001|CORRER
       takeName: Armature.001|CORRER
       internalID: -208193723059021941
-      firstFrame: 0
-      lastFrame: 163
+      firstFrame: 4
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -130,7 +130,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
