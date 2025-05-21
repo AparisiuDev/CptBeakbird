@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +12,7 @@ public class DetectItems : MonoBehaviour
     private bool waitForE = false;
     private bool isAdded;
     public bool hasStolenPublic;
+    private string itemSize;
     private ItemStatsContainer ItemStats;
     GameObject itemObj;
 
@@ -52,6 +55,7 @@ public class DetectItems : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(itemSize);
         FadeManager();
         timerStolen();
         // If we are on cooldown, update the timer
@@ -71,6 +75,9 @@ public class DetectItems : MonoBehaviour
             {
                 if (!accionEjecutada)
                 {
+                    //Animacion
+                    AnimationHandlerIn(itemSize);
+                    //Barra de cojer
                     FadeIn();
                     tiempoPresionado += Time.deltaTime;
                     Slider.value = tiempoPresionado / segundosNecesarios;
@@ -79,6 +86,7 @@ public class DetectItems : MonoBehaviour
                         FadeOut();
                         StoreItem(ItemStats.ItemStats);
                         accionEjecutada = true;
+                        AnimationHandlerOut();
                     }
                 }
             }
@@ -162,6 +170,7 @@ public class DetectItems : MonoBehaviour
     private void SeeItemStats(Collider other)
     {
         segundosNecesarios = other.GetComponent<ItemStatsContainer>().timeToGrab;
+        itemSize = other.GetComponent<ItemStatsContainer>().size;
 
         itemObj = other.gameObject;
         ItemStats = itemObj.GetComponent<ItemStatsContainer>();
@@ -216,6 +225,28 @@ public class DetectItems : MonoBehaviour
         targetAlpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+    }
+
+    private void AnimationHandlerIn(string size)
+    {
+        switch (size)
+        {
+            case "SMALL":
+                Animations.AnimatorManager.myAnimator.SetBool("grabSmall", true);
+                break;
+            case "MID":
+                break;
+            case "BIG":
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void AnimationHandlerOut()
+    {
+        Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
+
     }
 
     /***DEBUG

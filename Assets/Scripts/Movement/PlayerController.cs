@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float sprintSpeed = 10f;
     [SerializeField] private float rotationSpeed;
+    public bool inputEnabled = true;
 
     [Header("Gravity Settings")]
     [SerializeField] private float gravity = -9.81f;
@@ -24,6 +25,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float staminaDrain = 20f;     // per second
     [SerializeField] private float staminaRegen = 15f;     // per second
     [SerializeField] private float staminaRegenDelay = 1f; // seconds before regen starts
+
+    [Header("Idle Break settings")]
+    [SerializeField] private int frameCounter;
+
 
     private float currentStamina;
     private float regenTimer;
@@ -50,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(!inputEnabled) return;
         InputManagement();
         Movement();
         UpdateRotation();
@@ -79,21 +85,27 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalMove = move * currentSpeed;
         horizontalMove.y = 0;
 
+        
         /*** Manager Animations ***/
+        ExtraIdleExitCheck();
         if (!isSprinting && horizontalMove != Vector3.zero)
         {
             Animations.AnimatorManager.myAnimator.SetBool("isWalking", true);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
+            ExitIdle();
         }
         if (isSprinting && horizontalMove != Vector3.zero)
         {
-            Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
+            //Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", true);
+            ExitIdle();
+
         }
         else if (horizontalMove == Vector3.zero)
         {
             Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
+            Tick();
         }
 
         // Apply gravity
@@ -137,6 +149,42 @@ public class PlayerController : MonoBehaviour
             {
                 currentStamina += staminaRegen * Time.deltaTime;
                 currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+            }
+        }
+    }
+
+    /*** IDLE BREAK ***/
+    public void Tick()
+    {
+        frameCounter++;
+
+        if (frameCounter > 3000 && frameCounter % 20 == 0)
+        {
+            // Chance to do the action
+            if (Random.value < 0.2f)
+            {
+                frameCounter = 0;
+                Animations.AnimatorManager.myAnimator.SetBool("idleBreakToggle", true);
+            }
+        }
+    }
+
+    public void ExitIdle()
+    {
+        if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleBreak"))
+        {
+            Animations.AnimatorManager.myAnimator.SetBool("idleBreakToggle", false);
+        }
+    }
+
+    public void ExtraIdleExitCheck()
+    {
+        if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleBreak"))
+        {
+            // normalizedTime = 1.0 means the animation has finished one full loop
+            if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.975f)
+            {
+                Animations.AnimatorManager.myAnimator.SetBool("idleBreakToggle", false);
             }
         }
     }

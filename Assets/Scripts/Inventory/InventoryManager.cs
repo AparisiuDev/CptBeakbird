@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
     [Header("NO TOCAR / PREGUNTAR AL BIEL")]
-    public float SlowDownScaleFactor = 0.3f;
+    //public float SlowDownScaleFactor = 0.3f;
     public float SlowDown;
     private bool menuActivated;
 
@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Tab) && !menuActivated)
         {
-            SlowDown = SlowDownScaleFactor;
+            SlowDown = 0.3f;
             Time.timeScale = SlowDown;
             InventoryMenu.SetActive(true);
             menuActivated = true;

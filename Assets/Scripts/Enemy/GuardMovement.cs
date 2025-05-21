@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class GuardMovement : MonoBehaviour
 {
     public Transform[] waypoints;
@@ -119,5 +120,10 @@ public class GuardMovement : MonoBehaviour
         currentState = State.Patrolling;
         agent.isStopped = false;
         agent.SetDestination(waypoints[currentWaypointIndex].position);
+    }
+
+    private void playerHPManager()
+    {
+
     }
 }

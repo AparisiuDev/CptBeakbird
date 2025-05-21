@@ -12,6 +12,9 @@ public struct ItemStats
     public float Satisfaction;
     [Header("Time to grab")]
     public float timeToGrab;
+    [Header("Size SMALL/MID/BIG")]
+    public string size;
+
     [Header("Model")]
     public Sprite Model;
 

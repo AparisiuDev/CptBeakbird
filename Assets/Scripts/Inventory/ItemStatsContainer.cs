@@ -16,6 +16,8 @@ public class ItemStatsContainer : MonoBehaviour
     public float Satisfaction;
     [Header("Time to grab")]
     public float timeToGrab;
+    [Header("Size SMALL/MID/BIG")]
+    public string size;
     [Header("Model")]
     public Sprite Model;
 
@@ -30,6 +32,7 @@ public class ItemStatsContainer : MonoBehaviour
             Price = Price,
             Satisfaction = Satisfaction,
             timeToGrab = timeToGrab,
+            size = size,
             Model = Model
         };
 
