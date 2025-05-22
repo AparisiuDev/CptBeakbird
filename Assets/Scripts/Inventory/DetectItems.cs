@@ -17,7 +17,7 @@ public class DetectItems : MonoBehaviour
     GameObject itemObj;
 
     [Header("Grande Pequeño Variables")]
-    public float scaleFactor = 1.1f; // Factor de escala al entrar en el trigger
+    public float scaleFactor = 1.3f; // Factor de escala al entrar en el trigger
     public float duration = 0.2f; // Duración del escalado
     private Vector3 originalScale;
 
@@ -55,7 +55,7 @@ public class DetectItems : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(itemSize);
+        //Debug.Log(itemSize);
         FadeManager();
         timerStolen();
         // If we are on cooldown, update the timer
@@ -98,6 +98,9 @@ public class DetectItems : MonoBehaviour
             accionEjecutada = false;
             Slider.value = Mathf.MoveTowards(Slider.value, 0f, 0.5f * Time.deltaTime);
             if (Slider.value <= 0f) FadeOut();
+            //Anims
+            Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
+
         }
     }
 
@@ -125,6 +128,8 @@ public class DetectItems : MonoBehaviour
         ItemStats = null;
         // Hacer pequeño el item
         MakeSmaller(other);
+        //Anims
+        Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
 
     }
 

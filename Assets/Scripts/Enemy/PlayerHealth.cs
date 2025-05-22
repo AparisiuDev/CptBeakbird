@@ -7,9 +7,9 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
     public bool preHasFinishedDiedAnim;
     public bool hasFinishedDiedAnim;
+    public bool hasFinishedCircle;
     private PlayerController playerController;
     public Transform cameraTransform;
-    [SerializeField] private int frameCounter;
 
 
     void Start()
@@ -21,7 +21,10 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Update()
     {
-        if (preHasFinishedDiedAnim) Tick();
+        if (preHasFinishedDiedAnim)
+        {
+            Tick();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -67,13 +70,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void Tick()
     {
-        frameCounter++;
-
-        if (frameCounter > 318) // DURACION DE ATRAPADEEEEEE
+        Debug.Log(hasFinishedDiedAnim);
+        if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            frameCounter = 0;
             hasFinishedDiedAnim = true;
         }
     }
-
 }

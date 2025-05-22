@@ -15,10 +15,9 @@ public class SceneTransitioner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerHealth.hasFinishedDiedAnim)
+        if (playerHealth.hasFinishedCircle)
         {
-            SceneManager.LoadScene("LevelSelect");
-            
+           SceneManager.LoadScene("LevelSelect");
         }
     }
 }
