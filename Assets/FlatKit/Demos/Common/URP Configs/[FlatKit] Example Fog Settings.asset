@@ -82,7 +82,7 @@ MonoBehaviour:
   heightFogIntensity: 0.5
   cameraRelativePosition: 0
   distanceHeightBlend: 0.5
-  renderEvent: 550
+  renderEvent: 600
   applyInSceneView: 1
   effectMaterial: {fileID: 3809722197779856838}
 --- !u!21 &3809722197779856838
