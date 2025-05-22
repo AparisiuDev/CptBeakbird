@@ -5,15 +5,23 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     private int currentHealth;
+    public bool preHasFinishedDiedAnim;
     public bool hasFinishedDiedAnim;
     private PlayerController playerController;
     public Transform cameraTransform;
+    [SerializeField] private int frameCounter;
+
 
     void Start()
     {
         currentHealth = maxHealth;
+        preHasFinishedDiedAnim = false;
         hasFinishedDiedAnim = false;
         playerController = GetComponent<PlayerController>();
+    }
+    private void Update()
+    {
+        if (preHasFinishedDiedAnim) Tick();
     }
 
     public void TakeDamage(int damage)
@@ -35,11 +43,9 @@ public class PlayerHealth : MonoBehaviour
         playerController.inputEnabled = false;
         Animations.AnimatorManager.myAnimator.SetTrigger("hasDied");
         RotateToFaceCameraInstant();
+        preHasFinishedDiedAnim = true;
         // normalizedTime = 1.0 means the animation has finished one full loop
-        if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 3.4f)
-        {
-            hasFinishedDiedAnim = true;
-        }
+        
     }
 
     public bool IsDead()
@@ -59,5 +65,15 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Tick()
+    {
+        frameCounter++;
+
+        if (frameCounter > 318) // DURACION DE ATRAPADEEEEEE
+        {
+            frameCounter = 0;
+            hasFinishedDiedAnim = true;
+        }
+    }
 
 }

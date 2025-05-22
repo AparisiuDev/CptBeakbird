@@ -393,7 +393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227124197536107516, guid: 366377810aaf4fc4ab2be725a54c5712, type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 227124197536107516, guid: 366377810aaf4fc4ab2be725a54c5712, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime1
@@ -5945,7 +5945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227124197536107516, guid: 366377810aaf4fc4ab2be725a54c5712, type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 227124197536107516, guid: 366377810aaf4fc4ab2be725a54c5712, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime1
