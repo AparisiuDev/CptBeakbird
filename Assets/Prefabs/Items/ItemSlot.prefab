@@ -169,7 +169,12 @@ MonoBehaviour:
   description: 
   model: {fileID: 0}
   isFull: 0
+  itemDescriptionImage: {fileID: 0}
+  ItemDescriptionName: {fileID: 0}
+  ItemDescriptionDescription: {fileID: 0}
   itemModel: {fileID: 3513154650412766594}
+  selectedShader: {fileID: 0}
+  thisItemSelected: 0
 --- !u!1 &8769466448398366314
 GameObject:
   m_ObjectHideFlags: 0
