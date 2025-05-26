@@ -25,8 +25,8 @@ TagManager:
   - Sea
   - Wall
   - PlayerUI
-  - 
-  - 
+  - ObjetosDecorNoColision
+  - ObjetosDecorColision
   - 
   - 
   - 

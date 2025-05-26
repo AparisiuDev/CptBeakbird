@@ -70,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Tick()
     {
-        Debug.Log(hasFinishedDiedAnim);
+        //Debug.Log(hasFinishedDiedAnim);
         if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             hasFinishedDiedAnim = true;

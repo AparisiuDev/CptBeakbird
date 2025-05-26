@@ -122,8 +122,4 @@ public class GuardMovement : MonoBehaviour
         agent.SetDestination(waypoints[currentWaypointIndex].position);
     }
 
-    private void playerHPManager()
-    {
-
-    }
 }
