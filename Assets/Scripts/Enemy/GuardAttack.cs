@@ -14,7 +14,7 @@ public class GuardAttack : MonoBehaviour
     public int attackDamage = 20;
     public LayerMask playerLayer;
 
-    private GuardMovement guardMovement;
+    private TowerMovement towerMovement;
     private NavMeshAgent agent;
     private float lastAttackTime;
     private PlayerHealth health;
@@ -23,12 +23,12 @@ public class GuardAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        guardMovement = GetComponent<GuardMovement>();
+        towerMovement = GetComponent<TowerMovement>();
         agent = GetComponent<NavMeshAgent>();
 
-        if(guardMovement.player != null )
+        if(towerMovement.player != null )
         {
-            health = guardMovement.player.GetComponent<PlayerHealth>(); 
+            health = towerMovement.player.GetComponent<PlayerHealth>(); 
         }
     }
 
@@ -36,18 +36,18 @@ public class GuardAttack : MonoBehaviour
     void Update()
     {
         //Comprobamos que esten todos los componentes necesarios
-        if (guardMovement == null || guardMovement.player == null || health == null)
+        if (towerMovement == null || towerMovement.player == null || health == null)
             return;
 
         //Comprobamos si el jugador esta vivo
         if (health.IsDead())
         {
             agent.isStopped = false;
-            guardMovement.ReturnToPatrol();
+            towerMovement.ReturnToPatrol();
             return;
         }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, guardMovement.player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, towerMovement.player.position);
 
         //Si el jugador esta a rango le intentamos atacar
         if (distanceToPlayer <= attackRange)

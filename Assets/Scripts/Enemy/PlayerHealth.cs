@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         Debug.Log("Player has died!");
         playerController.inputEnabled = false;

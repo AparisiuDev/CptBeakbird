@@ -9,7 +9,6 @@ public class VisionConicaTower : MonoBehaviour
     public LayerMask capaObstaculos;         // Quines capes bloquegen la visió
     public bool canSeePlayer;
     public bool activeChase;
-    public DetectItems detectItems;
     public Transform player;
 
     [Header("Debug")]
