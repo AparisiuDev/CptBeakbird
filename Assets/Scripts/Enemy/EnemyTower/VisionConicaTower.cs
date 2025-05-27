@@ -5,8 +5,11 @@ public class VisionConicaTower : MonoBehaviour
     [Header("Paràmetres de visió")]
     public float anguloVision = 60f;         // Angle del con en graus
     public float distanciaVision = 10f;      // Distància màxima de visió
-    public LayerMask capaObjetivo;           // Quines capes poden ser detectades
-    public LayerMask capaObstaculos;         // Quines capes bloquegen la visió
+    // NUEVO: Offset per desplaçar el con lateralment
+    [Range(-180f, 180f)]
+    public float offsetAngulo = 0f;
+    public LayerMask capaObjetivo;           // Capes detectables
+    public LayerMask capaObstaculos;         // Capes que bloquegen visió
     public bool canSeePlayer;
     public bool activeChase;
     public Transform player;
@@ -14,83 +17,68 @@ public class VisionConicaTower : MonoBehaviour
     [Header("Debug")]
     public bool mostrarGizmos = true;
 
+
     private void Start()
     {
-        /*** DEBUG
-        estilo = new GUIStyle();
-        estilo.fontSize = 32;
-        estilo.normal.textColor = Color.black;
-        ***/
     }
-    /// <summary>
-    /// Comprova si un objectiu està dins del con de visió i sense obstacles.
-    /// </summary>
+
     public bool EstaEnZonaDeVision(Transform objetivo)
     {
-        // Calculem la direcció cap a l'objectiu
         Vector3 direccionAlObjetivo = (objetivo.position - transform.position).normalized;
-        // Calculem l'angle entre la direcció del personatge i l'objectiu
-        float angulo = Vector3.Angle(transform.forward, direccionAlObjetivo);
 
-        // Si l'objectiu està dins de l'angle de visió...
+        // Direcció base del con amb l'offset aplicat
+        Vector3 direccionCono = Quaternion.Euler(0, offsetAngulo, 0) * transform.forward;
+
+        float angulo = Vector3.Angle(direccionCono, direccionAlObjetivo);
+
         if (angulo < anguloVision / 2f)
         {
-            // Calculem la distància fins a l'objectiu
             float distancia = Vector3.Distance(transform.position, objetivo.position);
-            // Si està dins de la distància màxima...
             if (distancia < distanciaVision)
             {
-                // Comprovem si hi ha obstacles entre el personatge i l'objectiu
                 if (!Physics.Raycast(transform.position, direccionAlObjetivo, distancia, capaObstaculos))
                 {
-                    return true; // L'objectiu està dins del con de visió i sense obstacles
+                    return true;
                 }
             }
         }
-        return false; // No està dins del con o hi ha obstacles
+        return false;
     }
 
-    // Exemple d'ús: detectar si un objectiu està dins de la zona de visió
     void FixedUpdate()
     {
-       // Debug.Log(EstaEnZonaDeVision(player));
         if (!EstaEnZonaDeVision(player))
         {
             activeChase = false;
             canSeePlayer = false;
             return;
         }
-        // Comprovem si cada objectiu està dins del con de visió
+
         if (EstaEnZonaDeVision(player))
         {
             canSeePlayer = true;
-            //Debug.Log("Objectiu detectat: " + objetivo.name + "!");
         }
-        else canSeePlayer = false;
-        // Busquem tots els objectius dins de la distància màxima
-
+        else
+        {
+            canSeePlayer = false;
+        }
     }
 
-    // Visualització del con a l'escena
     void OnDrawGizmos()
     {
         if (!mostrarGizmos) return;
 
         Gizmos.color = Color.red;
-        // Dibuixem els límits esquerre i dret del con
-        Vector3 leftLimit = Quaternion.Euler(0, -anguloVision / 2, 0) * transform.forward;
-        Vector3 rightLimit = Quaternion.Euler(0, anguloVision / 2, 0) * transform.forward;
+
+        // Direcció base del con amb offset
+        Vector3 direccionCono = Quaternion.Euler(0, offsetAngulo, 0) * transform.forward;
+
+        Vector3 leftLimit = Quaternion.Euler(0, -anguloVision / 2, 0) * direccionCono;
+        Vector3 rightLimit = Quaternion.Euler(0, anguloVision / 2, 0) * direccionCono;
+
         Gizmos.DrawRay(transform.position, leftLimit * distanciaVision);
         Gizmos.DrawRay(transform.position, rightLimit * distanciaVision);
-        // Dibuixem una esfera per indicar la distància màxima
+
         Gizmos.DrawWireSphere(transform.position, distanciaVision);
     }
-
-    /*** DEBUG
-    private GUIStyle estilo;
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 40, 200, 30), "EstaEnZonaDeVision: " + EstaEnZonaDeVision(player).ToString(), estilo);
-    }
-    ***/
 }

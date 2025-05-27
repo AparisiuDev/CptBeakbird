@@ -8801,7 +8801,7 @@ PrefabInstance:
       addedObject: {fileID: 980468973}
     - targetCorrespondingSourceObject: {fileID: 7190121929542736367, guid: c697799b0d9699f4c8beb7210e7285eb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 980468974}
+      addedObject: {fileID: 980468977}
     - targetCorrespondingSourceObject: {fileID: 7190121929542736367, guid: c697799b0d9699f4c8beb7210e7285eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 980468976}
@@ -13333,6 +13333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anguloVision: 60
   distanciaVision: 10
+  offsetAngulo: 0
   capaObjetivo:
     serializedVersion: 2
     m_Bits: 2048
@@ -13343,24 +13344,6 @@ MonoBehaviour:
   activeChase: 0
   player: {fileID: 382434925}
   mostrarGizmos: 1
---- !u!114 &980468974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980468962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21906a22a9d0b104089f5c990f704e62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 382434925}
-  chaseDuration: 2
-  stopDuration: 1
-  rotationInterval: 6
-  rotationSpeed: 180
-  graffitiTarget: {fileID: 559727488}
 --- !u!4 &980468975 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5086889752660876015, guid: c697799b0d9699f4c8beb7210e7285eb, type: 3}
@@ -13375,7 +13358,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 980468962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca1a58fcccadd7409ab3f6b83e56479, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f4886faa380abe48aa6a99aa9e4c6c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 651586383}
@@ -13386,6 +13369,25 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
+--- !u!114 &980468977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980468962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079ebdfbf8b094842ba963bcbf04a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 382434925}
+  chaseDuration: 2
+  stopDuration: 1
+  rotationInterval: 6
+  rotationSpeed: 180
+  graffitiTarget: {fileID: 559727488}
+  offsetInterval: 5
 --- !u!1001 &985080816
 PrefabInstance:
   m_ObjectHideFlags: 0
