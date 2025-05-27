@@ -9,6 +9,7 @@ TagManager:
   - Items
   - Sea
   - FxTemporaire
+  - Tutorial
   layers:
   - Default
   - TransparentFX

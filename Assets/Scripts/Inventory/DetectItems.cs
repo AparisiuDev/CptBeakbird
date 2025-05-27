@@ -29,7 +29,9 @@ public class DetectItems : MonoBehaviour
     private bool timerActive = false;
 
     [Header("UI")]
+
     //Cooldown when getting items
+    public LevelGoals levelGoals;
     public KeyCode grabItemKey = KeyCode.E;
     public float segundosNecesarios;  // Tiempo que debe mantenerse pulsado
     private float tiempoPresionado = 0f;
@@ -40,6 +42,7 @@ public class DetectItems : MonoBehaviour
     [SerializeField] private float fadeDuration = 1f;
     private float targetAlpha = 1f; // Default is fully visible
     [SerializeField] private float fadeSpeed = 1f;
+    private SpawnParticleEffect spawnEffect;
 
 
     private void Start()
@@ -83,10 +86,14 @@ public class DetectItems : MonoBehaviour
                     Slider.value = tiempoPresionado / segundosNecesarios;
                     if (tiempoPresionado >= segundosNecesarios)
                     {
+                        MeterController();
                         FadeOut();
                         StoreItem(ItemStats.ItemStats);
+                        //ItemStats.ItemStats.Satisfaction;
                         accionEjecutada = true;
                         AnimationHandlerOut();
+                        //VFX
+                        spawnEffect.SpawnParticle();
                     }
                 }
             }
@@ -104,6 +111,11 @@ public class DetectItems : MonoBehaviour
         }
     }
 
+    public void MeterController()
+    {
+        //Debug.Log(ItemStats.ItemStats.Satisfaction);
+        levelGoals.happiness += (ItemStats.ItemStats.Satisfaction)/100;
+    }
     private void OnTriggerEnter(Collider other)
     {
         // Only process the collision if the timer is not running
@@ -112,6 +124,7 @@ public class DetectItems : MonoBehaviour
             originalScale = other.transform.localScale;
             MakeBigger(other);
             SeeItemStats(other);
+            spawnEffect = other.GetComponent<SpawnParticleEffect>();
             waitForE = true;
 
             CooldownHandler();

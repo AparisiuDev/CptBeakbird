@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using LevelLocker;
 
 public class LevelEnterer : MonoBehaviour
 {
     // Checks del trigger y variable del nombre del level
+    private bool inRange;
     private bool canEnter;
     private string LevelCol;
     public float scaleFactor = 1.2f; // Factor de escala al entrar en el trigger
@@ -16,30 +18,35 @@ public class LevelEnterer : MonoBehaviour
 
     private void Update()
     {
-       if (canEnter)
+       if (inRange && canEnter)
          if(Input.GetKeyDown(KeyCode.E))
           SceneManager.LoadScene(LevelCol);
     }
     
     private void OnTriggerEnter(Collider other)
     {
+        //Setear el tp point
+        LevelCol = LevelCheck(LevelCol, other);
+
+
+        if (!canEnter) return;
         //Activar la posibilidad de entrar
-        canEnter = true;
+        inRange = true;
 
         //Hacergrande
         originalScale = other.transform.localScale;
         MakeBigger(other);
 
-        //Setear el tp point
-        LevelCol = LevelCheck(LevelCol, other);
     }
 
     private void OnTriggerExit(Collider other)
     {
         // Reset de todo
+        inRange = false;
         canEnter = false;
         LevelCol = null;
 
+        if(!canEnter) return;
         // Hacer normal again
         MakeSmaller(other);
     }
@@ -48,11 +55,22 @@ public class LevelEnterer : MonoBehaviour
     {
         //Check de quin level es
 
-        if (other.CompareTag("Level1"))
+        if (other.CompareTag("Tutorial"))
+        {
             level = "Level1Test";
+            canEnter = true;
+        }
+        if (other.CompareTag("Level1"))
+        {
+            level = "Level1Test";
+            canEnter = LevelLocker.VariablesGlobales._lvl1;
+        }
 
         if (other.CompareTag("Level2"))
+        {
             level = "Level2Test";
+            canEnter = LevelLocker.VariablesGlobales._lvl2;
+        }
 
         return level;
     }
@@ -60,7 +78,6 @@ public class LevelEnterer : MonoBehaviour
     private void MakeBigger(Collider other)
     {
         LeanTween.scale(other.gameObject, originalScale * scaleFactor, duration).setEase(LeanTweenType.easeOutElastic);
-        
     }
 
     private void MakeSmaller(Collider other)

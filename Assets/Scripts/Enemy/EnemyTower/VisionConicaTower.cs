@@ -53,7 +53,7 @@ public class VisionConicaTower : MonoBehaviour
     // Exemple d'ús: detectar si un objectiu està dins de la zona de visió
     void FixedUpdate()
     {
-        Debug.Log(EstaEnZonaDeVision(player));
+       // Debug.Log(EstaEnZonaDeVision(player));
         if (!EstaEnZonaDeVision(player))
         {
             activeChase = false;
