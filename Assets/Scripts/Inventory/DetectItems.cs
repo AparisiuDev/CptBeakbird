@@ -5,6 +5,7 @@ using System.Reflection.Emit;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using LevelLocker;
 
 public class DetectItems : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class DetectItems : MonoBehaviour
     public bool hasStolenPublic;
     private string itemSize;
     private ItemStatsContainer ItemStats;
+    public DeadCamCulling player;
+
     GameObject itemObj;
 
     [Header("Grande Pequeño Variables")]
@@ -40,9 +43,12 @@ public class DetectItems : MonoBehaviour
     public Slider Slider;
     private CanvasGroup canvasGroup;
     [SerializeField] private float fadeDuration = 1f;
-    private float targetAlpha = 1f; // Default is fully visible
+    private float targetAlpha = 0f; // Default is fully visible
     [SerializeField] private float fadeSpeed = 1f;
     private SpawnParticleEffect spawnEffect;
+
+    private string objectTag;
+    private Collider typeOfCollider;
 
 
     private void Start()
@@ -58,9 +64,7 @@ public class DetectItems : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(itemSize);
         FadeManager();
-        timerStolen();
         // If we are on cooldown, update the timer
         if (currentCooldownTime > 0)
         {
@@ -70,6 +74,34 @@ public class DetectItems : MonoBehaviour
         {
             canEnter = true; // Allow OnTriggerEnter again after cooldown
         }
+
+        switch (objectTag)
+        {
+            case "Items":
+                TypeItem();
+                break;
+
+            case "Barco":
+                TypeBarco();
+                break;
+
+            case "Chest":
+                break;
+
+            case "NPC":
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    /*** TYPES OF INTERACTIONS ***/
+
+    public void TypeItem()
+    {
+        //Debug.Log(itemSize);
+        timerStolen();
 
         // Al inputear E, checkea que este dentro y todo bien, y destruye el item y guarda su valor
         if (waitForE)
@@ -86,37 +118,90 @@ public class DetectItems : MonoBehaviour
                     Slider.value = tiempoPresionado / segundosNecesarios;
                     if (tiempoPresionado >= segundosNecesarios)
                     {
-                        MeterController();
+                        HappinessMeterController();
                         FadeOut();
                         StoreItem(ItemStats.ItemStats);
                         //ItemStats.ItemStats.Satisfaction;
                         accionEjecutada = true;
                         AnimationHandlerOut();
                         //VFX
-                        spawnEffect.SpawnParticle();
+                        if (spawnEffect != null)
+                            spawnEffect.SpawnParticle();
                     }
                 }
             }
         }
         else
         {
-            // Si se suelta la tecla antes del tiempo, reinicia
-            tiempoPresionado = 0f;
-            accionEjecutada = false;
-            Slider.value = Mathf.MoveTowards(Slider.value, 0f, 0.5f * Time.deltaTime);
-            if (Slider.value <= 0f) FadeOut();
-            //Anims
-            Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
-
+            StopPressButton();
         }
     }
 
-    public void MeterController()
+    public void TypeBarco()
     {
-        //Debug.Log(ItemStats.ItemStats.Satisfaction);
-        levelGoals.happiness += (ItemStats.ItemStats.Satisfaction)/100;
+
+        if (waitForE)
+        {
+            if (Input.GetKey(grabItemKey))
+            {
+                if (!accionEjecutada)
+                {
+                    //Animacion
+                    AnimationHandlerIn("BARCO");
+                    //Barra de cojer
+                    FadeIn();
+                    tiempoPresionado += Time.deltaTime;
+                    Slider.value = tiempoPresionado / segundosNecesarios;
+                    if (tiempoPresionado >= segundosNecesarios)
+                    {
+                        GoToLevelSelect();
+                        FadeOut();
+                        accionEjecutada = true;
+                        AnimationHandlerOut();
+
+                        //VFX
+                        if (spawnEffect != null)
+                            spawnEffect.SpawnParticle();
+                    }
+                }
+            }
+            else
+            {
+                StopPressButton();
+            }
+        }
     }
+
+   
     private void OnTriggerEnter(Collider other)
+    {
+        objectTag = other.tag;
+        typeOfCollider = other;
+        if (other.GetComponent<SpawnParticleEffect>() != null) spawnEffect = other.GetComponent<SpawnParticleEffect>();
+        // Logic for type of interactions
+        switch (objectTag)
+        {
+            case "Items":
+                OnEnterItems(other);
+                break;
+            case "Barco":
+                OnEnterShip(other);
+                break;
+
+            case "Chest":
+                break;
+
+            case "NPC":
+                break;
+
+            default:
+                break;
+        }
+        
+    }
+
+    /*** ON TRIGGER ENTER STUFF ***/
+    private void OnEnterItems(Collider other)
     {
         // Only process the collision if the timer is not running
         if (canEnter && CheckGrab(other))
@@ -124,13 +209,21 @@ public class DetectItems : MonoBehaviour
             originalScale = other.transform.localScale;
             MakeBigger(other);
             SeeItemStats(other);
-            spawnEffect = other.GetComponent<SpawnParticleEffect>();
             waitForE = true;
-
             CooldownHandler();
         }
     }
-
+    private void OnEnterShip(Collider other)
+    {
+        if (LevelLocker.VariablesGlobales._leaveTut && canEnter)
+        {
+            originalScale = other.transform.localScale;
+            MakeBigger(other);
+            waitForE = true;
+            CooldownHandler();
+        }
+    }
+    /*** TRIGGER EXIT ***/
     private void OnTriggerExit(Collider other)
     {
         CooldownHandler();
@@ -139,12 +232,26 @@ public class DetectItems : MonoBehaviour
         waitForE = false;
         itemObj = null;
         ItemStats = null;
-        // Hacer pequeño el item
-        MakeSmaller(other);
+       // objectTag = null;
+        typeOfCollider = null;
         //Anims
         Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
+        //VFX
+        spawnEffect = null;
+        // Hacer pequeño el item y el barco solo si se ha pasado
+        if (other.tag == "Barco" )
+        {
+            if (levelGoals.goalsCompleted)
+            {
+                MakeSmaller(other);
+            }
+            else return;
+        }
+        else MakeSmaller(other);
 
     }
+
+    /*** OTHER LOGIC ***/
 
     private void CooldownHandler()
     {
@@ -187,7 +294,6 @@ public class DetectItems : MonoBehaviour
     // Guardar en una variable la info del item
     private void SeeItemStats(Collider other)
     {
-        segundosNecesarios = other.GetComponent<ItemStatsContainer>().timeToGrab;
         itemSize = other.GetComponent<ItemStatsContainer>().size;
 
         itemObj = other.gameObject;
@@ -250,21 +356,48 @@ public class DetectItems : MonoBehaviour
         switch (size)
         {
             case "SMALL":
+                segundosNecesarios = 1.6f;
                 Animations.AnimatorManager.myAnimator.SetBool("grabSmall", true);
                 break;
             case "MID":
                 break;
             case "BIG":
                 break;
+            case "BARCO":
+                segundosNecesarios = 1.6f;
+                Animations.AnimatorManager.myAnimator.SetBool("grabSmall", true);
+                break;
             default:
                 break;
         }
+    }
+
+    private void StopPressButton()
+    {
+        // Si se suelta la tecla antes del tiempo, reinicia
+        tiempoPresionado = 0f;
+        accionEjecutada = false;
+        Slider.value = Mathf.MoveTowards(Slider.value, 0f, 0.5f * Time.deltaTime);
+        if (Slider.value <= 0f) FadeOut();
+        //Anims
+        Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
     }
 
     private void AnimationHandlerOut()
     {
         Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
 
+    }
+
+    public void HappinessMeterController()
+    {
+        //Debug.Log(ItemStats.ItemStats.Satisfaction);
+        levelGoals.happiness += (ItemStats.ItemStats.Satisfaction) / 100;
+    }
+
+    public void GoToLevelSelect()
+    {
+        player.PlayCircleIn();
     }
 
     /***DEBUG

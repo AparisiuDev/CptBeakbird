@@ -10,8 +10,7 @@ public struct ItemStats
     [Header("Price and Satisfaction")]
     public float Price;
     public float Satisfaction;
-    [Header("Time to grab")]
-    public float timeToGrab;
+
     [Header("Size SMALL/MID/BIG")]
     public string size;
 

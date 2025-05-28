@@ -72,6 +72,7 @@
 
         Pass
         {
+
             HLSLPROGRAM
     	    // #define FLAT_KIT_DOTS_INSTANCING_ON // Uncomment to enable DOTS instancing
             #pragma prefer_hlslcc gles

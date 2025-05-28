@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LevelLocker;
+using UnityEngine.SceneManagement;
 
 
 public class LevelGoals : MonoBehaviour
@@ -22,12 +24,15 @@ public class LevelGoals : MonoBehaviour
     private bool hasDied = false;
     [Range(0f, 1f)]
     public float darkness = 0.5f; // Nuevo valor para V (brillo)
+    string sceneName;
+    public bool goalsCompleted = false;
 
 
     void Start()
     {
         DeclareArrowParameters();
         DeclareTime();
+        sceneName = SceneManager.GetActiveScene().name;
     }
 
     void Update()
@@ -82,6 +87,28 @@ public class LevelGoals : MonoBehaviour
 
     void ArrowManager()
     {
+        if (happiness == 1f)
+        {
+            switch (sceneName)
+            {
+                case "Level1Test":
+                    LevelLocker.VariablesGlobales._leaveTut = true;
+                    goalsCompleted = true;
+                    break;
+
+                case "Level2Test":
+                    LevelLocker.VariablesGlobales._leave1 = true;
+                    goalsCompleted = true;
+                    break;
+
+                case "Level3Test":
+                    LevelLocker.VariablesGlobales._leave2 = true;
+                    goalsCompleted = true;
+                    break;
+                default:
+                    break;
+            }
+        }
         if (arrow != null)
         {
             // Calcula el ángulo de destino

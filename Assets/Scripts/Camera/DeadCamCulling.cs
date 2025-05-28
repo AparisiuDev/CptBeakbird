@@ -24,9 +24,7 @@ public class DeadCamCulling : MonoBehaviour
     {
        if(playerHealth.hasFinishedDiedAnim)
         {
-            rawImageUI.SetActive(true);
-            //AddCulling();
-            player.Play();
+            PlayCircleIn();
         }
     }
 
@@ -42,5 +40,12 @@ public class DeadCamCulling : MonoBehaviour
     public void OnVideoEnd(VideoPlayer player)
     {
         playerHealth.hasFinishedCircle = true;
+    }
+
+    public void PlayCircleIn()
+    {
+        rawImageUI.SetActive(true);
+        //AddCulling();
+        player.Play();
     }
 }

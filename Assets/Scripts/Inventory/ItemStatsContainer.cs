@@ -31,7 +31,6 @@ public class ItemStatsContainer : MonoBehaviour
             Description = Description,
             Price = Price,
             Satisfaction = Satisfaction,
-            timeToGrab = timeToGrab,
             size = size,
             Model = Model
         };

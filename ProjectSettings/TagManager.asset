@@ -10,6 +10,7 @@ TagManager:
   - Sea
   - FxTemporaire
   - Tutorial
+  - Barco
   layers:
   - Default
   - TransparentFX
