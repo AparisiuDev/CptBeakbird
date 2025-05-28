@@ -8,9 +8,9 @@ public class GuardMovement : MonoBehaviour
 {
     public Transform[] waypoints;
     //public TowerDetectorMultiRay towerDetectorMultiRay;
-    private VisionConica visionConica;
+    public VisionConica visionConica;
     public Transform player;
-
+    public Animator animator; // Asigna el Animator en el Inspector
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
@@ -33,7 +33,6 @@ public class GuardMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        visionConica = GetComponent<VisionConica>();
         agent = GetComponent<NavMeshAgent>();
 
         //Si existen suficientes waypoints asingamos uno
@@ -49,12 +48,15 @@ public class GuardMovement : MonoBehaviour
         switch(currentState)
         {
             case State.Patrolling:
+                animator.SetBool("walkingToggle", true);
                 Patrol();
                 break;
             case State.Stopping:
+                animator.SetBool("walkingToggle", false); 
                 StopAndObserve();
                 break;
             case State.Chasing:
+                animator.SetBool("walkingToggle", true);
                 Chase();
                 break;
         }
@@ -82,6 +84,8 @@ public class GuardMovement : MonoBehaviour
     private void StopAndObserve() {
         if (visionConica != null && visionConica.canSeePlayer)
         {
+            agent.ResetPath();
+            LookAtPlayer();
             stopTimer += Time.deltaTime;
             if(stopTimer >= stopDuration)
             {
@@ -120,6 +124,21 @@ public class GuardMovement : MonoBehaviour
         currentState = State.Patrolling;
         agent.isStopped = false;
         agent.SetDestination(waypoints[currentWaypointIndex].position);
+    }
+
+    private void LookAtPlayer()
+    {
+        if (player != null)
+        {
+            Vector3 direccion = player.position - transform.position;
+            direccion.y = 0; // Opcional: ignora la altura para rotar solo en el eje Y
+
+            if (direccion != Vector3.zero)
+            {
+                Quaternion rotacionDeseada = Quaternion.LookRotation(direccion);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotacionDeseada, Time.deltaTime * 5f);
+            }
+        }
     }
 
 }

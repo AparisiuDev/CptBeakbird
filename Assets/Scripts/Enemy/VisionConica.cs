@@ -7,6 +7,7 @@ public class VisionConica : MonoBehaviour
     public float distanciaVision = 10f;      // Distància màxima de visió
     public LayerMask capaObjetivo;           // Quines capes poden ser detectades
     public LayerMask capaObstaculos;         // Quines capes bloquegen la visió
+    public bool KOS;
     public bool canSeePlayer;
     public bool activeChase;
     public DetectItems detectItems;
@@ -51,20 +52,19 @@ public class VisionConica : MonoBehaviour
         return false; // No està dins del con o hi ha obstacles
     }
 
+
     // Exemple d'ús: detectar si un objectiu està dins de la zona de visió
     void FixedUpdate()
     {
+        //Debug.Log(EstaEnZonaDeVision(player));
+        // Comprovem si cada objectiu està dins del con de visió
         if (!EstaEnZonaDeVision(player))
         {
             activeChase = false;
-            return;
+            canSeePlayer = false;
         }
-        // Comprovem si cada objectiu està dins del con de visió
-        if (detectItems.hasStolenPublic)
-        {
-            canSeePlayer = true;
-            //Debug.Log("Objectiu detectat: " + objetivo.name + "!");
-        }
+        else if (KOS) canSeePlayer = true;
+        else if (detectItems.hasStolenPublic) canSeePlayer = true;
         else canSeePlayer = false;
         // Busquem tots els objectius dins de la distància màxima
         
@@ -83,6 +83,21 @@ public class VisionConica : MonoBehaviour
         Gizmos.DrawRay(transform.position, rightLimit * distanciaVision);
         // Dibuixem una esfera per indicar la distància màxima
         Gizmos.DrawWireSphere(transform.position, distanciaVision);
+    }
+
+    void KOS_Follow()
+    {
+        // Busquem tots els objectius dins de la distància màxima
+        Collider []
+        objetivos = Physics.OverlapSphere(transform.position, distanciaVision, capaObjetivo);
+        foreach (var objetivo in objetivos)
+        {
+            // Comprovem si cada objectiu està dins del con de visió
+            if (EstaEnZonaDeVision(objetivo.transform))
+            {
+                canSeePlayer = true;
+            }
+        }
     }
 
     /*** DEBUG

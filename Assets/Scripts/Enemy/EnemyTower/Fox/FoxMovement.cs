@@ -9,6 +9,7 @@ public class FoxMovement : MonoBehaviour
 {
     private VisionConicaTower visionConicaTower;
     public Transform player;
+    public Animator Animator;
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
@@ -29,7 +30,7 @@ public class FoxMovement : MonoBehaviour
     private bool lookTowardsTarget = true;
 
     private float offsetTimer = 0f;
-    public float offsetInterval = 3f; // Cambiar cada 3 segundos
+    public float offsetInterval = 1f; // Cambiar cada 3 segundos
     private bool offsetFlipped = false;
     private float targetOffset = 0f;
     public float offsetLerpSpeed = 120f; // Velocidad en grados por segundo
@@ -90,6 +91,20 @@ public class FoxMovement : MonoBehaviour
                 offsetFlipped = !offsetFlipped;
                 targetOffset = offsetFlipped ? 180f : 0f;
                 offsetTimer = 0f;
+                //Animaciones
+                if (targetOffset == 0f)
+                {
+                    offsetInterval = 8f;
+                    Animator.SetBool("chaseToggle", false);
+                    Animator.SetBool("girarseToggle", false);
+                    Animator.SetBool("pintarToggle", true);
+                }
+                if (targetOffset == 180f){
+                    offsetInterval = 2.6f;
+                    Animator.SetBool("chaseToggle", false);
+                    Animator.SetBool("girarseToggle", true);
+                    Animator.SetBool("pintarToggle", false);
+                }
             }
 
             // Interpolación suave del offsetAngulo hacia targetOffset
@@ -136,6 +151,9 @@ public class FoxMovement : MonoBehaviour
     }
     private void Chase()
     {
+        Animator.SetBool("chaseToggle", true);
+        Animator.SetBool("girarseToggle", false);
+        Animator.SetBool("pintarToggle", false);
         // Interpolación suave del offsetAngulo hacia estar recto
         visionConicaTower.offsetAngulo = Mathf.MoveTowards(
             visionConicaTower.offsetAngulo,
@@ -167,6 +185,9 @@ public class FoxMovement : MonoBehaviour
         agent.SetDestination(initialPosition);
         if (!agent.pathPending && agent.remainingDistance < 0.01f)
         {
+            Animator.SetBool("chaseToggle", false);
+            Animator.SetBool("girarseToggle", false);
+            Animator.SetBool("pintarToggle", true);
             LookAtTarget(graffitiTarget);
             currentState = State.Patrolling;
         }

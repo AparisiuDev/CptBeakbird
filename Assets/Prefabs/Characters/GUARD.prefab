@@ -97,6 +97,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -201,8 +203,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  towerDetectorMultiRay: {fileID: 5852434714297496684}
+  visionConica: {fileID: 0}
   player: {fileID: 0}
+  animator: {fileID: 0}
   chaseDuration: 2
   stopDuration: 1
 --- !u!195 &7187533368426678539

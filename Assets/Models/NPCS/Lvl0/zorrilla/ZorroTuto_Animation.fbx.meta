@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: efd09b42377cc7e4592d2a535b06dc17
+guid: 41ac14c216a98dc46ac4f335667246e8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 4934141189deeca419cc529fe73deccf, type: 2}
+      name: Zorro_TUTO
+    second: {fileID: 2100000, guid: ff96921bf2d27e84095620dbf47b177f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,11 +36,40 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Aguila_Walk
-      takeName: Aguila_Walk
-      internalID: -1164026310484734347
+      name: Zorro_Gira
+      takeName: Zorro_Gira
+      internalID: -8499046405012518582
       firstFrame: 0
-      lastFrame: 126
+      lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Zorro_Pinta
+      takeName: Zorro_Pinta
+      internalID: -5772628767473396024
+      firstFrame: 0
+      lastFrame: 159
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -65,11 +94,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Aguila_Idle
-      takeName: Aguila_Idle
-      internalID: -6274579231190614146
+      name: Zorro_Run.001
+      takeName: Zorro_Run.001
+      internalID: 7965054259573121544
       firstFrame: 0
-      lastFrame: 125
+      lastFrame: 42
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
