@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using LevelLocker;
-
+using MaskTransitions;
 public class LevelEnterer : MonoBehaviour
 {
     // Checks del trigger y variable del nombre del level
@@ -20,9 +20,9 @@ public class LevelEnterer : MonoBehaviour
     {
        if (inRange && canEnter)
          if(Input.GetKeyDown(KeyCode.E))
-          SceneManager.LoadScene(LevelCol);
+            TransitionManager.Instance.LoadLevel(LevelCol, 0.5f);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         //Setear el tp point

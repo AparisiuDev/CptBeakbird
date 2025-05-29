@@ -1,12 +1,12 @@
 using UnityEngine;
-
+using MaskTransitions;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     private int currentHealth;
-    public bool preHasFinishedDiedAnim;
-    public bool hasFinishedDiedAnim;
+    public bool preHasFinishedDiedAnim = false;
+    public bool hasFinishedDiedAnim = false;
     public bool hasFinishedCircle;
     private PlayerController playerController;
     public Transform cameraTransform;
@@ -14,12 +14,13 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        Animations.AnimatorManager.myAnimator.SetBool("hasDied", false);
         currentHealth = maxHealth;
         preHasFinishedDiedAnim = false;
         hasFinishedDiedAnim = false;
         playerController = GetComponent<PlayerController>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (preHasFinishedDiedAnim)
         {
@@ -42,9 +43,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
+        Animations.AnimatorManager.myAnimator.SetTrigger("hasDied");
         Debug.Log("Player has died!");
         playerController.inputEnabled = false;
-        Animations.AnimatorManager.myAnimator.SetTrigger("hasDied");
         RotateToFaceCameraInstant();
         preHasFinishedDiedAnim = true;
         // normalizedTime = 1.0 means the animation has finished one full loop
@@ -74,6 +75,8 @@ public class PlayerHealth : MonoBehaviour
         if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             hasFinishedDiedAnim = true;
+            TransitionManager.Instance.LoadLevel("LevelSelect", 0.5f);
+            preHasFinishedDiedAnim = false;
         }
     }
 }

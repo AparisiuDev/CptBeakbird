@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MaskTransitions;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class MainMenuController : MonoBehaviour
     //Boton ir hacia juego
     public void StartButton()
     {
-        SceneManager.LoadScene("LevelSelect");
+        TransitionManager.Instance.LoadLevel("LevelSelect", 0.5f);
+       //SceneManager.LoadScene("LevelSelect");
     }
 
     //Boton volver hacia menu
