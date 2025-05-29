@@ -45,6 +45,8 @@ public class VisionConica : MonoBehaviour
                 // Comprovem si hi ha obstacles entre el personatge i l'objectiu
                 if (!Physics.Raycast(transform.position, direccionAlObjetivo, distancia, capaObstaculos))
                 {
+                    //BUILD:DEBUG
+                    //gameObject.SetActive(false);
                     return true; // L'objectiu està dins del con de visió i sense obstacles
                 }
             }

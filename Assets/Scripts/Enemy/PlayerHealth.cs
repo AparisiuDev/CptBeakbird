@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public bool hasFinishedCircle;
     private PlayerController playerController;
     public TransitionSettings transition;
+    public TransitionManager transitionManager;
     public Transform cameraTransform;
 
 
@@ -24,9 +25,15 @@ public class PlayerHealth : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Die();
+        }
         if (preHasFinishedDiedAnim)
         {
-            Tick();
+            transitionManager.Transition("LevelSelect", transition, 2.5f);
+            preHasFinishedDiedAnim = false;
+
         }
     }
 
@@ -71,14 +78,15 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /****
     public void Tick()
     {
         //Debug.Log(hasFinishedDiedAnim);
         if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             hasFinishedDiedAnim = true;
-            TransitionManager.Instance().Transition("LevelSelect", transition, 0f);
-            preHasFinishedDiedAnim = false;
+            
         }
     }
+    ***/
 }

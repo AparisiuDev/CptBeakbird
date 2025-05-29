@@ -67,6 +67,7 @@ public class FoxMovement : MonoBehaviour
                 Patrol();
                 break;
             case State.Stopping:
+                gameObject.SetActive(false);
                 StopAndObserve();
                 break;
             case State.Chasing:
@@ -187,7 +188,7 @@ public class FoxMovement : MonoBehaviour
         {
             Animator.SetBool("chaseToggle", false);
             Animator.SetBool("girarseToggle", false);
-            Animator.SetBool("pintarToggle", true);
+            //Animator.SetBool("pintarToggle", true);
             LookAtTarget(graffitiTarget);
             currentState = State.Patrolling;
         }
