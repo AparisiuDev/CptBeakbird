@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using MaskTransitions;
+//using MaskTransitions;
+using EasyTransition;
 
 public class MainMenuController : MonoBehaviour
 {
     public GameObject optionPanel;
+    public TransitionSettings transition;
 
     //Boton ir hacia juego
     public void StartButton()
     {
-        TransitionManager.Instance.LoadLevel("LevelSelect", 0.5f);
+        //Debug.Log("YAHOO");
+        TransitionManager.Instance().Transition("LevelSelect", transition, 0f);
+        //TransitionManager.Instance.LoadLevel("LevelSelect", 0.5f);
        //SceneManager.LoadScene("LevelSelect");
     }
 

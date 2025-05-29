@@ -1,5 +1,6 @@
 using UnityEngine;
-using MaskTransitions;
+//using MaskTransitions;
+using EasyTransition;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public bool hasFinishedDiedAnim = false;
     public bool hasFinishedCircle;
     private PlayerController playerController;
+    public TransitionSettings transition;
     public Transform cameraTransform;
 
 
@@ -75,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
         if (Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             hasFinishedDiedAnim = true;
-            TransitionManager.Instance.LoadLevel("LevelSelect", 0.5f);
+            TransitionManager.Instance().Transition("LevelSelect", transition, 0f);
             preHasFinishedDiedAnim = false;
         }
     }

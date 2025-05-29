@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using LevelLocker;
-
+using EasyTransition;
 public class DetectItems : MonoBehaviour
 {
     private bool grabInRange = false;
@@ -15,7 +15,7 @@ public class DetectItems : MonoBehaviour
     public bool hasStolenPublic;
     private string itemSize;
     private ItemStatsContainer ItemStats;
-    public DeadCamCulling player;
+    //public DeadCamCulling player;
 
     GameObject itemObj;
 
@@ -49,6 +49,7 @@ public class DetectItems : MonoBehaviour
 
     private string objectTag;
     private Collider typeOfCollider;
+    public TransitionSettings transition;
 
 
     private void Start()
@@ -397,7 +398,7 @@ public class DetectItems : MonoBehaviour
 
     public void GoToLevelSelect()
     {
-        player.PlayCircleIn();
+        TransitionManager.Instance().Transition("LevelSelect", transition, 0f);
     }
 
     /***DEBUG

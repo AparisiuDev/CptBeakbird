@@ -4,7 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using LevelLocker;
-using MaskTransitions;
+//using MaskTransitions;
+using EasyTransition;
 public class LevelEnterer : MonoBehaviour
 {
     // Checks del trigger y variable del nombre del level
@@ -13,6 +14,7 @@ public class LevelEnterer : MonoBehaviour
     private string LevelCol;
     public float scaleFactor = 1.2f; // Factor de escala al entrar en el trigger
     public float duration = 0.5f; // Duración del escalado
+    public TransitionSettings transition;
 
     private Vector3 originalScale;
 
@@ -20,7 +22,7 @@ public class LevelEnterer : MonoBehaviour
     {
        if (inRange && canEnter)
          if(Input.GetKeyDown(KeyCode.E))
-            TransitionManager.Instance.LoadLevel(LevelCol, 0.5f);
+            TransitionManager.Instance().Transition(LevelCol, transition, 0f);
     }
 
     private void OnTriggerEnter(Collider other)
