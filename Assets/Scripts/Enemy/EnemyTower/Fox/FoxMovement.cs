@@ -67,7 +67,6 @@ public class FoxMovement : MonoBehaviour
                 Patrol();
                 break;
             case State.Stopping:
-                gameObject.SetActive(false);
                 StopAndObserve();
                 break;
             case State.Chasing:

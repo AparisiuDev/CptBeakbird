@@ -13,7 +13,7 @@ public class OriolBubbles : MonoBehaviour
         {
             var emission = targetParticles.emission;
             emission.enabled = false;
-            Debug.Log("Particles stopped.");
+            //Debug.Log("Particles stopped.");
         }
     }
 
@@ -24,7 +24,7 @@ public class OriolBubbles : MonoBehaviour
         {
             var emission = targetParticles.emission;
             emission.enabled = true;
-            Debug.Log("Particles started.");
+            //Debug.Log("Particles started.");
         }
     }
 }

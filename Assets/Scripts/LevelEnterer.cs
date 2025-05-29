@@ -20,6 +20,7 @@ public class LevelEnterer : MonoBehaviour
 
     private void Update()
     {
+
        if (inRange && canEnter)
          if(Input.GetKeyDown(KeyCode.E))
             TransitionManager.Instance().Transition(LevelCol, transition, 0f);
@@ -45,12 +46,11 @@ public class LevelEnterer : MonoBehaviour
     {
         // Reset de todo
         inRange = false;
-        canEnter = false;
         LevelCol = null;
-
         if(!canEnter) return;
         // Hacer normal again
         MakeSmaller(other);
+        canEnter = false;
     }
 
     private string LevelCheck(string level, Collider other)

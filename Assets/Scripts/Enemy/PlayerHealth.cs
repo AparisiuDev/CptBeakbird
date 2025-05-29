@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        Animations.AnimatorManager.myAnimator.SetBool("hasDied", false);
+        //Animations.AnimatorManager.myAnimator.SetBool("hasDied", false);
         currentHealth = maxHealth;
         preHasFinishedDiedAnim = false;
         hasFinishedDiedAnim = false;

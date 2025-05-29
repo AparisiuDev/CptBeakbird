@@ -242,13 +242,13 @@ public class DetectItems : MonoBehaviour
         // Hacer pequeño el item y el barco solo si se ha pasado
         if (other.tag == "Barco" )
         {
-            if (levelGoals.goalsCompleted)
+            if (levelGoals.goalsCompleted || LevelLocker.VariablesGlobales._leaveTut)
             {
                 MakeSmaller(other);
             }
             else return;
         }
-        else MakeSmaller(other);
+        MakeSmaller(other);
 
     }
 
