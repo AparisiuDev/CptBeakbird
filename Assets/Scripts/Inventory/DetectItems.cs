@@ -14,7 +14,11 @@ public class DetectItems : MonoBehaviour
     private bool isAdded;
     public bool hasStolenPublic;
     private string itemSize;
+    private bool itemVanish;
+    private bool isVanishing;
+    private bool canEraseVanish;
     private ItemStatsContainer ItemStats;
+
     //public DeadCamCulling player;
 
     GameObject itemObj;
@@ -46,6 +50,9 @@ public class DetectItems : MonoBehaviour
     private float targetAlpha = 0f; // Default is fully visible
     [SerializeField] private float fadeSpeed = 1f;
     private SpawnParticleEffect spawnEffect;
+    // Saco
+    public float addSpeed = 1f; // velocidad del suavizado
+
 
     private string objectTag;
     private Collider typeOfCollider;
@@ -120,14 +127,13 @@ public class DetectItems : MonoBehaviour
                     if (tiempoPresionado >= segundosNecesarios)
                     {
                         HappinessMeterController();
+                        LootMeterController();
                         FadeOut();
                         StoreItem(ItemStats.ItemStats);
                         //ItemStats.ItemStats.Satisfaction;
                         accionEjecutada = true;
                         AnimationHandlerOut();
-                        //VFX
-                        if (spawnEffect != null)
-                            spawnEffect.SpawnParticle();
+                        
                     }
                 }
             }
@@ -229,12 +235,19 @@ public class DetectItems : MonoBehaviour
     {
         CooldownHandler();
         // Seguridad de resetear todo en falso y null
-        grabInRange = false;
-        waitForE = false;
-        itemObj = null;
-        ItemStats = null;
-       // objectTag = null;
-        typeOfCollider = null;
+        if (!isVanishing)
+        {
+            grabInRange = false;
+            waitForE = false;
+            itemObj = null;
+            ItemStats = null;
+        }
+        else
+        {
+            StartCoroutine(putNull());
+        }
+            // objectTag = null;
+            typeOfCollider = null;
         //Anims
         Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
         //VFX
@@ -250,6 +263,16 @@ public class DetectItems : MonoBehaviour
         }
         MakeSmaller(other);
 
+    }
+    private IEnumerator putNull()
+    {
+        // Wait until itemVanish is true
+        yield return new WaitUntil(() => canEraseVanish);
+
+        grabInRange = false;
+        waitForE = false;
+        itemObj = null;
+        ItemStats = null;
     }
 
     /*** OTHER LOGIC ***/
@@ -277,11 +300,9 @@ public class DetectItems : MonoBehaviour
 
             // Add and disable object
             if (!isAdded) Inventory.instance.backpack.Add(NextItem);
-            itemObj.SetActive(false);
-            grabInRange = false;
-            waitForE = false;
-            itemObj = null;
-            ItemStats = null;
+            SmoothRemove(typeOfCollider);
+            StartCoroutine(WaitAndVanish());
+
         }
     }
 
@@ -310,7 +331,41 @@ public class DetectItems : MonoBehaviour
     }
     private void MakeSmaller(Collider other)
     {
+        if (!isVanishing)
         LeanTween.scale(other.gameObject, originalScale, duration).setEase(LeanTweenType.easeOutElastic).setEase(LeanTweenType.easeInBack);
+    }
+
+    private void SmoothRemove(Collider other)
+    {
+        if (other.GetComponent<SpawnParticleEffect>() != null) spawnEffect = other.GetComponent<SpawnParticleEffect>();
+        canEraseVanish = false;
+        isVanishing = true;
+        Vector3 down = new Vector3(0.1f, 0.1f, 0.1f);
+        Vector3 limitDown = new Vector3(0.2f, 0.2f, 0.2f);
+        LeanTween.scale(other.gameObject, down, duration).setEase(LeanTweenType.easeOutElastic).setEase(LeanTweenType.easeInBack);
+        StartCoroutine(SmallEnough(duration));
+    }
+
+    IEnumerator SmallEnough(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            itemVanish = true;
+        }
+    }
+
+    private IEnumerator WaitAndVanish()
+    {
+        // Wait until itemVanish is true
+        yield return new WaitUntil(() => itemVanish);
+
+        if (spawnEffect != null)
+            spawnEffect.SpawnParticle();
+        itemObj.SetActive(false);
+        itemVanish = false;
+        isVanishing = false;
+        canEraseVanish = true;
     }
 
     private void justStolenItem(float duration)
@@ -394,6 +449,14 @@ public class DetectItems : MonoBehaviour
     {
         //Debug.Log(ItemStats.ItemStats.Satisfaction);
         levelGoals.happiness += (ItemStats.ItemStats.Satisfaction) / 100;
+    }
+
+    public void LootMeterController()
+    {
+
+        //Debug.Log(ItemStats.ItemStats.Satisfaction);
+        levelGoals.lootValue += (ItemStats.ItemStats.Price) / 100;
+        //levelGoals.lootValue = Mathf.Lerp(levelGoals.lootValue, (ItemStats.ItemStats.Price)/100, Time.deltaTime *addSpeed);
     }
 
     public void GoToLevelSelect()

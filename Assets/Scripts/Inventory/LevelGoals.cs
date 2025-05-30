@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using LevelLocker;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 
 public class LevelGoals : MonoBehaviour
@@ -20,6 +21,9 @@ public class LevelGoals : MonoBehaviour
     public LootManager lootManager;
     [Range(0f, 1f)]
     public float lootValue; // Felicidad entre 0 y 1
+    public int phaseCurrent;
+    public float fillSpeed; // Tiempo que tarda en llenarse
+    private bool lootCompleted = false;
 
     [Header("Time")]
     public float timerDuration; // Tiempo total en segundos
@@ -43,12 +47,13 @@ public class LevelGoals : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         ArrowManager();
-        LootManager(lootValue);
+        LootManager();
         TimeManager();
         UpdateSliderColorBrightness(); 
+        LeaveTrigger();
     }
 
     void DeclareTime()
@@ -96,7 +101,25 @@ public class LevelGoals : MonoBehaviour
 
     void ArrowManager()
     {
-        if (happiness < 1f) lootGoalsCompleted = false;
+        
+        if (arrow != null)
+        {
+            // Calcula el ángulo de destino
+            float targetAngle = (1f - happiness) * 90f;
+            targetRotation = Quaternion.Euler(0f, 0f, -targetAngle);
+
+            // Interpola suavemente hacia esa rotación
+            rectTransform.localRotation = Quaternion.Lerp(
+                rectTransform.localRotation,
+                targetRotation,
+                Time.deltaTime * rotationSpeed
+            );
+        }
+    }
+
+    void LeaveTrigger()
+    {
+        if (happiness< 1f && lootCompleted) lootGoalsCompleted = false;
         if (happiness == 1f)
         {
             switch (sceneName)
@@ -119,38 +142,59 @@ public class LevelGoals : MonoBehaviour
                     break;
             }
         }
-        if (arrow != null)
-        {
-            // Calcula el ángulo de destino
-            float targetAngle = (1f - happiness) * 90f;
-            targetRotation = Quaternion.Euler(0f, 0f, -targetAngle);
-
-            // Interpola suavemente hacia esa rotación
-            rectTransform.localRotation = Quaternion.Lerp(
-                rectTransform.localRotation,
-                targetRotation,
-                Time.deltaTime * rotationSpeed
-            );
-        }
     }
 
-    void LootManager(float loot)
+    void LootManager()
     {
-        switch (loot)
+        //lootManager.filler.fillAmount = lootValue;
+        //lootManager.filler.DOFillAmount(lootValue, fillSpeed);
+        lootManager.filler.fillAmount = Mathf.Lerp(lootManager.filler.fillAmount, lootValue, Time.deltaTime * fillSpeed);
+        if (lootManager.filler.fillAmount < 0.2f)
         {
-            case "Level1Test":
-                LevelLocker.VariablesGlobales._leaveTut = true;
-                lootGoalsCompleted = true;
+            phaseCurrent = 1;
+        }
+        if (lootManager.filler.fillAmount >= 0.2f)
+        {
+            phaseCurrent = 2;
+        }
+        if (lootManager.filler.fillAmount >= 0.4f)
+        {
+            phaseCurrent = 3;
+
+        }
+        if (lootManager.filler.fillAmount >= 0.8f)
+        {
+            phaseCurrent = 4;
+
+        }
+        if (lootManager.filler.fillAmount >= 0.99f)
+        {
+            lootCompleted = true;
+            phaseCurrent = 5;
+
+        }
+        switch (phaseCurrent)
+        {
+            case 1:
+                lootManager.filler.sprite = lootManager.full_1;
+                lootManager.bg.sprite = lootManager.empty_1;
                 break;
 
-            case "Level2Test":
-                LevelLocker.VariablesGlobales._leave1 = true;
-                lootGoalsCompleted = true;
+            case 2:
+                lootManager.filler.sprite = lootManager.full_2;
+                lootManager.bg.sprite = lootManager.empty_2;
                 break;
 
-            case "Level3Test":
-                LevelLocker.VariablesGlobales._leave2 = true;
-                lootGoalsCompleted = true;
+            case 3:
+                lootManager.filler.sprite = lootManager.full_3;
+                lootManager.bg.sprite = lootManager.empty_3;
+                break;
+            case 4:
+                lootManager.filler.sprite = lootManager.full_4;
+                lootManager.bg.sprite = lootManager.empty_4;
+                break;
+            case 5:
+                lootManager.bg.sprite = lootManager.full_final;
                 break;
             default:
                 break;

@@ -2828,7 +2828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &207388905
 Transform:
   m_ObjectHideFlags: 0
@@ -5793,17 +5793,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0713c0d676c209c43b7e8a774fc59c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  empty_1: {fileID: 0}
-  empty_2: {fileID: 0}
-  empty_3: {fileID: 0}
-  empty_4: {fileID: 0}
-  full_1: {fileID: 0}
-  full_2: {fileID: 0}
-  full_3: {fileID: 0}
-  full_4: {fileID: 0}
-  full_final: {fileID: 0}
-  filler: {fileID: 0}
-  bg: {fileID: 0}
+  empty_1: {fileID: 21300000, guid: e4fb386bba4a7a94ca499a897475dd95, type: 3}
+  empty_2: {fileID: 21300000, guid: 0046058f90f55844e9e4c2d292f614f5, type: 3}
+  empty_3: {fileID: 21300000, guid: fdeccac162452394e933df123be86982, type: 3}
+  empty_4: {fileID: 21300000, guid: 424172ab56d6ce84c9c6d99771d376c4, type: 3}
+  full_1: {fileID: 21300000, guid: 845a12cf8a0b77145933f77ce61a1dfc, type: 3}
+  full_2: {fileID: 21300000, guid: 8fcd7776a57add24f926000206fb91a5, type: 3}
+  full_3: {fileID: 21300000, guid: 4f40cda78a83da7418773372ad6fce09, type: 3}
+  full_4: {fileID: 21300000, guid: 0dec4118f5b8752469ddc0463b9b7a44, type: 3}
+  full_final: {fileID: 21300000, guid: 36d8505de81d3024fb8e646e03875d44, type: 3}
+  filler: {fileID: 161097213}
+  bg: {fileID: 610993660}
 --- !u!1 &449874012
 GameObject:
   m_ObjectHideFlags: 0
@@ -17633,7 +17633,9 @@ MonoBehaviour:
   arrow: {fileID: 1944574115}
   happiness: 0
   lootManager: {fileID: 447450668}
-  loot: 0
+  lootValue: 0
+  phaseCurrent: 0
+  fillSpeed: 2
   timerDuration: 200
   health: {fileID: 3454379841467590447}
   timer: {fileID: 241902171}
@@ -33346,6 +33348,10 @@ PrefabInstance:
     - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: size
       value: SMALL
+      objectReference: {fileID: 0}
+    - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
+      propertyPath: Price
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: timeToGrab
