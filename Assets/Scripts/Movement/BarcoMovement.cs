@@ -22,6 +22,7 @@ public class BarcoMovement : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(LevelLocker.VariablesGlobales._lvl1);
         InputManagement();
         Movement();
     }

@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------------------------------------
 // Cartoon FX
-// (c) 2012-2025 Jean Moreno
+// (c) 2012-2020 Jean Moreno
 //--------------------------------------------------------------------------------------------------------------------------------
 
 #if defined(UNITY_PARTICLE_INSTANCING_ENABLED)
@@ -21,19 +21,16 @@
 	{
 		float sceneZ = SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(projection)).r;
 
-		if (unity_OrthoParams.w == 1)
-		{
-			// orthographic camera
-			#if defined(UNITY_REVERSED_Z)
-				sceneZ = 1.0f - sceneZ;
-			#endif
-			sceneZ = (sceneZ * _ProjectionParams.z) + _ProjectionParams.y;
-		}
-		else
-		{
-			// perspective camera
-			sceneZ = LinearEyeDepthURP(sceneZ, _ZBufferParams);
-		}
+	#if defined(SOFT_PARTICLES_ORTHOGRAPHIC)
+		// orthographic camera
+		#if defined(UNITY_REVERSED_Z)
+			sceneZ = 1.0f - sceneZ;
+		#endif
+		sceneZ = (sceneZ * _ProjectionParams.z) + _ProjectionParams.y;
+	#else
+		// perspective camera
+		sceneZ = LinearEyeDepthURP(sceneZ, _ZBufferParams);
+	#endif
 
 		float fade = saturate (far * ((sceneZ - near) - projection.z));
 		return fade;
@@ -42,19 +39,16 @@
 	float SoftParticles(float near, float far, float4 projection)
 	{
 		float sceneZ = (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(projection)));
-		if (unity_OrthoParams.w == 1)
-		{
-			// orthographic camera
-			#if defined(UNITY_REVERSED_Z)
-				sceneZ = 1.0f - sceneZ;
-			#endif
-			sceneZ = (sceneZ * _ProjectionParams.z) + _ProjectionParams.y;
-		}
-		else
-		{
-			// perspective camera
-			sceneZ = LinearEyeDepth(sceneZ);
-		}
+	#if defined(SOFT_PARTICLES_ORTHOGRAPHIC)
+		// orthographic camera
+		#if defined(UNITY_REVERSED_Z)
+			sceneZ = 1.0f - sceneZ;
+		#endif
+		sceneZ = (sceneZ * _ProjectionParams.z) + _ProjectionParams.y;
+	#else
+		// perspective camera
+		sceneZ = LinearEyeDepth(sceneZ);
+	#endif
 
 		float fade = saturate (far * ((sceneZ - near) - projection.z));
 		return fade;

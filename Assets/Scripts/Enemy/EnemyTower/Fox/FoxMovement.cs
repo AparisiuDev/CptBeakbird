@@ -10,6 +10,8 @@ public class FoxMovement : MonoBehaviour
     private VisionConicaTower visionConicaTower;
     public Transform player;
     public Animator Animator;
+    public ParticleSystem sawPlayerVFX;
+
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
@@ -135,7 +137,7 @@ public class FoxMovement : MonoBehaviour
             stopTimer += Time.deltaTime;
             if (stopTimer >= stopDuration)
             {
-
+                sawPlayerVFX.Play();
                 currentState = State.Chasing;
                 agent.isStopped = false;
                 timeSinceLastSeen = Time.time;

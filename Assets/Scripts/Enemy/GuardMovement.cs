@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 
 public class GuardMovement : MonoBehaviour
@@ -11,6 +12,7 @@ public class GuardMovement : MonoBehaviour
     public VisionConica visionConica;
     public Transform player;
     public Animator animator; // Asigna el Animator en el Inspector
+    public ParticleSystem sawPlayerVFX;
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
@@ -89,6 +91,7 @@ public class GuardMovement : MonoBehaviour
             stopTimer += Time.deltaTime;
             if(stopTimer >= stopDuration)
             {
+                sawPlayerVFX.Play();
                 currentState = State.Chasing;
                 agent.isStopped = false;
                 timeSinceLastSeen = Time.time;

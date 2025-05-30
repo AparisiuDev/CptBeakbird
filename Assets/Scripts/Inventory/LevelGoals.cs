@@ -87,6 +87,7 @@ public class LevelGoals : MonoBehaviour
 
     void ArrowManager()
     {
+        if (happiness < 1f) goalsCompleted = false;
         if (happiness == 1f)
         {
             switch (sceneName)

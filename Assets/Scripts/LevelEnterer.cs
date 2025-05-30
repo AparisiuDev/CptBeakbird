@@ -64,13 +64,13 @@ public class LevelEnterer : MonoBehaviour
         }
         if (other.CompareTag("Level1"))
         {
-            level = "Level1Test";
+            level = "Level2Test";
             canEnter = LevelLocker.VariablesGlobales._lvl1;
         }
 
         if (other.CompareTag("Level2"))
         {
-            level = "Level2Test";
+            level = "Level3Test";
             canEnter = LevelLocker.VariablesGlobales._lvl2;
         }
 
