@@ -7,7 +7,7 @@ public class ShowKey : MonoBehaviour
     public KeyScaler keyScaler;
     public TextMeshProUGUI textoUI;
     public string textToShow;
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -16,9 +16,9 @@ public class ShowKey : MonoBehaviour
         }
     }
 
-    /***
+    
     private void OnTriggerExit(Collider other)
     {
         keyScaler.Hide();
-    } ***/
+    }
 }

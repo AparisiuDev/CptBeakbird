@@ -16,6 +16,11 @@ public class LevelGoals : MonoBehaviour
     private Quaternion targetRotation;
     private float rotationSpeed = 2.5f; // Velocidad de interpolación
 
+    [Header("Loot")]
+    public LootManager lootManager;
+    [Range(0f, 1f)]
+    public float lootValue; // Felicidad entre 0 y 1
+
     [Header("Time")]
     public float timerDuration; // Tiempo total en segundos
     private float currentTime;
@@ -25,7 +30,10 @@ public class LevelGoals : MonoBehaviour
     [Range(0f, 1f)]
     public float darkness = 0.5f; // Nuevo valor para V (brillo)
     string sceneName;
+    [Header("Goals Check")]
     public bool goalsCompleted = false;
+    public bool happinessGoalsCompleted = false;
+    public bool lootGoalsCompleted = false;
 
 
     void Start()
@@ -38,6 +46,7 @@ public class LevelGoals : MonoBehaviour
     void Update()
     {
         ArrowManager();
+        LootManager(lootValue);
         TimeManager();
         UpdateSliderColorBrightness(); 
     }
@@ -87,24 +96,24 @@ public class LevelGoals : MonoBehaviour
 
     void ArrowManager()
     {
-        if (happiness < 1f) goalsCompleted = false;
+        if (happiness < 1f) lootGoalsCompleted = false;
         if (happiness == 1f)
         {
             switch (sceneName)
             {
                 case "Level1Test":
                     LevelLocker.VariablesGlobales._leaveTut = true;
-                    goalsCompleted = true;
+                    lootGoalsCompleted = true;
                     break;
 
                 case "Level2Test":
                     LevelLocker.VariablesGlobales._leave1 = true;
-                    goalsCompleted = true;
+                    lootGoalsCompleted = true;
                     break;
 
                 case "Level3Test":
                     LevelLocker.VariablesGlobales._leave2 = true;
-                    goalsCompleted = true;
+                    lootGoalsCompleted = true;
                     break;
                 default:
                     break;
@@ -122,6 +131,29 @@ public class LevelGoals : MonoBehaviour
                 targetRotation,
                 Time.deltaTime * rotationSpeed
             );
+        }
+    }
+
+    void LootManager(float loot)
+    {
+        switch (loot)
+        {
+            case "Level1Test":
+                LevelLocker.VariablesGlobales._leaveTut = true;
+                lootGoalsCompleted = true;
+                break;
+
+            case "Level2Test":
+                LevelLocker.VariablesGlobales._leave1 = true;
+                lootGoalsCompleted = true;
+                break;
+
+            case "Level3Test":
+                LevelLocker.VariablesGlobales._leave2 = true;
+                lootGoalsCompleted = true;
+                break;
+            default:
+                break;
         }
     }
 }
