@@ -7,11 +7,12 @@ using UnityEngine.Animations;
 
 public class FoxMovement : MonoBehaviour
 {
+    [Header("Declaromg stuff")]
+
     private VisionConicaTower visionConicaTower;
     public Transform player;
     public Animator Animator;
     public ParticleSystem sawPlayerVFX;
-
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
@@ -22,6 +23,8 @@ public class FoxMovement : MonoBehaviour
     private float stopTimer = 0f;
 
     // Rotation Dude
+    [Header("Rotation Stuff")]
+
     public float rotationInterval = 6f; // cada cuántos segundos gira 180 grados
     private float rotationTimer = 0f;
     private Quaternion targetRotation;
@@ -32,10 +35,17 @@ public class FoxMovement : MonoBehaviour
     private bool lookTowardsTarget = true;
 
     private float offsetTimer = 0f;
-    public float offsetInterval = 1f; // Cambiar cada 3 segundos
+    private float offsetInterval;// Cambiar cada 3 segundos
     private bool offsetFlipped = false;
     private float targetOffset = 0f;
     public float offsetLerpSpeed = 120f; // Velocidad en grados por segundo
+
+    [Header("Limites rotacion")]
+    public float limit1;
+    public float limit2;
+
+    public float offsetInterval1;
+    public float offsetInterval2;
 
     private enum State
     {
@@ -91,18 +101,18 @@ public class FoxMovement : MonoBehaviour
             if (offsetTimer >= offsetInterval)
             {
                 offsetFlipped = !offsetFlipped;
-                targetOffset = offsetFlipped ? 180f : 0f;
+                targetOffset = offsetFlipped ? limit1 : limit2;
                 offsetTimer = 0f;
                 //Animaciones
-                if (targetOffset == 0f)
+                if (targetOffset == limit2)
                 {
-                    offsetInterval = 8f;
+                    offsetInterval = offsetInterval2;
                     Animator.SetBool("chaseToggle", false);
                     Animator.SetBool("girarseToggle", false);
                     Animator.SetBool("pintarToggle", true);
                 }
-                if (targetOffset == 180f){
-                    offsetInterval = 2.6f;
+                if (targetOffset == limit1){
+                    offsetInterval = offsetInterval1;
                     Animator.SetBool("chaseToggle", false);
                     Animator.SetBool("girarseToggle", true);
                     Animator.SetBool("pintarToggle", false);

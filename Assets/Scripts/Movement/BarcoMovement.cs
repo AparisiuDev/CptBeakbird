@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BarcoMovement : MonoBehaviour
 {
+    public Animator remador;
     [Header("References")]
     private CharacterController controller;
 
@@ -44,5 +45,14 @@ public class BarcoMovement : MonoBehaviour
 
         // Rotación
         transform.Rotate(Vector3.up * effectiveTurn * rotationSpeed * Time.deltaTime);
+
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        {
+            remador.SetBool("remar", true);
+        }
+        else
+        {
+            remador.SetBool("remar", false);
+        }
     }
 }

@@ -10,6 +10,8 @@ public class GuardMovement : MonoBehaviour
     public Transform[] waypoints;
     //public TowerDetectorMultiRay towerDetectorMultiRay;
     public VisionConica visionConica;
+    public float visionConicaAux;
+
     public Transform player;
     public Animator animator; // Asigna el Animator en el Inspector
     public ParticleSystem sawPlayerVFX;
@@ -36,7 +38,7 @@ public class GuardMovement : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
+        visionConicaAux = visionConica.distanciaVision;
         //Si existen suficientes waypoints asingamos uno
         if(waypoints.Length > 0 )
         {
@@ -51,6 +53,7 @@ public class GuardMovement : MonoBehaviour
         {
             case State.Patrolling:
                 animator.SetBool("walkingToggle", true);
+                visionConica.distanciaVision = visionConicaAux;
                 Patrol();
                 break;
             case State.Stopping:
@@ -59,6 +62,7 @@ public class GuardMovement : MonoBehaviour
                 break;
             case State.Chasing:
                 animator.SetBool("walkingToggle", true);
+                visionConica.distanciaVision = visionConicaAux / 1.5f;
                 Chase();
                 break;
         }
