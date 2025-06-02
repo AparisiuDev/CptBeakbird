@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
+    [Header("SFX Manager")]
+    public GaviotoSFXManager sounds;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -90,12 +93,14 @@ public class PlayerController : MonoBehaviour
         ExtraIdleExitCheck();
         if (!isSprinting && horizontalMove != Vector3.zero)
         {
+            sounds.WalkingSFX();
             Animations.AnimatorManager.myAnimator.SetBool("isWalking", true);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
             ExitIdle();
         }
         if (isSprinting && horizontalMove != Vector3.zero)
         {
+
             //Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", true);
             ExitIdle();
@@ -105,6 +110,7 @@ public class PlayerController : MonoBehaviour
         {
             Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
+            sounds.IdleSFX();
             Tick();
         }
 

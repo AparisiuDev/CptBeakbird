@@ -124,8 +124,10 @@ public class DetectItems : MonoBehaviour
                     FadeIn();
                     tiempoPresionado += Time.deltaTime;
                     Slider.value = tiempoPresionado / segundosNecesarios;
+                   
                     if (tiempoPresionado >= segundosNecesarios)
                     {
+                        Animations.AnimatorManager.myAnimator.SetTrigger("grabCompleted");
                         HappinessMeterController();
                         LootMeterController();
                         FadeOut();
@@ -169,6 +171,7 @@ public class DetectItems : MonoBehaviour
                         //VFX
                         if (spawnEffect != null)
                             spawnEffect.SpawnParticle();
+
                     }
                 }
             }
@@ -250,6 +253,8 @@ public class DetectItems : MonoBehaviour
             typeOfCollider = null;
         //Anims
         Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
+        Animations.AnimatorManager.myAnimator.SetBool("grabMid", false);
+        Animations.AnimatorManager.myAnimator.SetBool("grabBig", false);
         //VFX
         spawnEffect = null;
         // Hacer pequeño el item y el barco solo si se ha pasado
@@ -416,12 +421,15 @@ public class DetectItems : MonoBehaviour
                 Animations.AnimatorManager.myAnimator.SetBool("grabSmall", true);
                 break;
             case "MID":
+                segundosNecesarios = 4.5f;
+                Animations.AnimatorManager.myAnimator.SetBool("grabMid", true);
                 break;
             case "BIG":
+                segundosNecesarios = 6.5f;
+                Animations.AnimatorManager.myAnimator.SetBool("grabBig", true);
                 break;
             case "BARCO":
                 segundosNecesarios = 1.6f;
-                Animations.AnimatorManager.myAnimator.SetBool("grabSmall", true);
                 break;
             default:
                 break;
@@ -442,6 +450,9 @@ public class DetectItems : MonoBehaviour
     private void AnimationHandlerOut()
     {
         Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
+        Animations.AnimatorManager.myAnimator.SetBool("grabMid", false);
+        Animations.AnimatorManager.myAnimator.SetBool("grabBig", false);
+
 
     }
 
