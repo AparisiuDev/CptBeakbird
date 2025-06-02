@@ -46,7 +46,7 @@ public class LevelGoals : MonoBehaviour
     void Update()
     {
         ArrowManager();
-        LootManager(lootValue);
+       // LootManager(lootValue);
         TimeManager();
         UpdateSliderColorBrightness(); 
     }
@@ -134,7 +134,7 @@ public class LevelGoals : MonoBehaviour
         }
     }
 
-    void LootManager(float loot)
+    /* void LootManager(float loot)
     {
         switch (loot)
         {
@@ -155,5 +155,5 @@ public class LevelGoals : MonoBehaviour
             default:
                 break;
         }
-    }
+    } */
 }

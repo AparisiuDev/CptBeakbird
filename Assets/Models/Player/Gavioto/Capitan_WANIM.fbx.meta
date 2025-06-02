@@ -31,8 +31,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.001|Atrapade
-      takeName: Armature.001|Atrapade
+      name: Armadura|Atrapade
+      takeName: Armadura|Atrapade
       internalID: -5769012338785257993
       firstFrame: 0
       lastFrame: 218
@@ -60,11 +60,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|CAMINAR
-      takeName: Armature.001|CAMINAR
+      name: Armadura|CAMINAR
+      takeName: Armadura|CAMINAR
       internalID: -2529584883525555409
-      firstFrame: 4
-      lastFrame: 60
+      firstFrame: 0
+      lastFrame: 194
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -89,11 +89,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: "Armature.001|Coger objeto peque\xF1o"
-      takeName: "Armature.001|Coger objeto peque\xF1o"
+      name: Armadura|coger
+      takeName: Armadura|coger
       internalID: 193326699437959166
       firstFrame: 0
-      lastFrame: 122
+      lastFrame: 57
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -118,11 +118,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|CORRER
-      takeName: Armature.001|CORRER
+      name: Armadura|CORRER
+      takeName: Armadura|CORRER
       internalID: -208193723059021941
-      firstFrame: 4
-      lastFrame: 60
+      firstFrame: 0
+      lastFrame: 163
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -147,8 +147,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|Idle
-      takeName: Armature.001|Idle
+      name: Armadura|Idle
+      takeName: Armadura|Idle
       internalID: 4699274299699868179
       firstFrame: 0
       lastFrame: 563
@@ -176,8 +176,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|Idle Break1
-      takeName: Armature.001|Idle Break1
+      name: Armadura|Idle Break1
+      takeName: Armadura|Idle Break1
       internalID: 2796902475662955670
       firstFrame: 0
       lastFrame: 605
@@ -205,8 +205,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|Patadoncio
-      takeName: Armature.001|Patadoncio
+      name: Armadura|Patadoncio
+      takeName: Armadura|Patadoncio
       internalID: -5429156876658437959
       firstFrame: 0
       lastFrame: 99
@@ -234,8 +234,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|Saludar
-      takeName: Armature.001|Saludar
+      name: Armadura|Saludar
+      takeName: Armadura|Saludar
       internalID: 8091861382854843776
       firstFrame: 0
       lastFrame: 164
