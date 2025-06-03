@@ -73,8 +73,8 @@ ModelImporter:
       name: Armadura|CAMINAR
       takeName: Armadura|CAMINAR
       internalID: -2529584883525555409
-      firstFrame: 0
-      lastFrame: 194
+      firstFrame: 4
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -131,8 +131,8 @@ ModelImporter:
       name: Armadura|CORRER
       takeName: Armadura|CORRER
       internalID: -208193723059021941
-      firstFrame: 0
-      lastFrame: 163
+      firstFrame: 4
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

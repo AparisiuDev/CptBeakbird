@@ -72,6 +72,7 @@ public class DetectItems : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(LevelLocker.VariablesGlobales._leaveTut);
         FadeManager();
         // If we are on cooldown, update the timer
         if (currentCooldownTime > 0)
@@ -148,7 +149,7 @@ public class DetectItems : MonoBehaviour
 
     public void TypeBarco()
     {
-
+        if (!LevelLocker.VariablesGlobales._leaveTut) return;
         if (waitForE)
         {
             if (Input.GetKey(grabItemKey))

@@ -5,6 +5,8 @@ using UnityEngine;
 public class BarcoMovement : MonoBehaviour
 {
     public Animator remador;
+    public Animator remoIZQ;
+    public Animator remoDER;
     [Header("References")]
     private CharacterController controller;
 
@@ -31,8 +33,14 @@ public class BarcoMovement : MonoBehaviour
     private void InputManagement()
     {
         moveInput = Input.GetAxis("Vertical");
+
+        // Bloquear movimiento hacia atrás
+        if (moveInput <= 0)
+            moveInput = 0;
+
         turnInput = Input.GetAxis("Horizontal");
     }
+
 
     private void Movement()
     {
@@ -48,11 +56,16 @@ public class BarcoMovement : MonoBehaviour
 
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
+            if (moveInput <= 0) return;
             remador.SetBool("remar", true);
+            remoIZQ.SetBool("remar", true);
+            remoDER.SetBool("remar", true);
         }
         else
         {
             remador.SetBool("remar", false);
+            remoIZQ.SetBool("remar", false);
+            remoDER.SetBool("remar", false);
         }
     }
 }
