@@ -14,7 +14,7 @@ public class MainMenuController : MonoBehaviour
     public void StartButton()
     {
         //Debug.Log("YAHOO");
-        TransitionManager.Instance().Transition("LevelSelect", transition, 0f);
+        TransitionManager.Instance().Transition("Cine_Tuto", transition, 0f);
         //TransitionManager.Instance.LoadLevel("LevelSelect", 0.5f);
        //SceneManager.LoadScene("LevelSelect");
     }

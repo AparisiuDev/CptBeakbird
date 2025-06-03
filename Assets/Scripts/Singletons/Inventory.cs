@@ -24,13 +24,6 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            foreach (ItemStats itemStats in backpack)
-            {
-                Debug.Log(itemStats.Name);
-            }
-        }
 
         DEB_ItemShow();
     }

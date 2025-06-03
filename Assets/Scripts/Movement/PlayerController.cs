@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Animations;
+using DarkTonic.MasterAudio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("SFX Manager")]
     public GaviotoSFXManager sounds;
+    private bool isWalking;
 
     private void Start()
     {
@@ -93,10 +95,14 @@ public class PlayerController : MonoBehaviour
         ExtraIdleExitCheck();
         if (!isSprinting && horizontalMove != Vector3.zero)
         {
-            sounds.WalkingSFX();
             Animations.AnimatorManager.myAnimator.SetBool("isWalking", true);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
             ExitIdle();
+            // SOUNDS //
+            //sounds.WalkingSFX();
+            if(!isWalking) // Play sound only if not already walking
+                MasterAudio.PlaySound("Caminar");
+            isWalking = true;
         }
         if (isSprinting && horizontalMove != Vector3.zero)
         {
@@ -110,8 +116,11 @@ public class PlayerController : MonoBehaviour
         {
             Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
-            sounds.IdleSFX();
             Tick();
+            // SOUNDS //
+            //sounds.IdleSFX();
+            MasterAudio.StopAllOfSound("Caminar");
+            isWalking = false;
         }
 
         // Apply gravity

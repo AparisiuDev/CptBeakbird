@@ -17,4 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TEST_SCENES/Level2Test.unity
     guid: 4e0a1432bc0657f43889794cc2901b76
+  - enabled: 1
+    path: Assets/Scenes/Cine_Tuto.unity
+    guid: d845455e5fb33c34b8f1aeaf55d7f9d5
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

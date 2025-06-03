@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GaviotoSFXManager : MonoBehaviour
 {
+
     [Header("Audio Source")]
     public AudioSource audioSource;
     [Header("Audio Clips")]

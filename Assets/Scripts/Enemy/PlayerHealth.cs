@@ -1,6 +1,8 @@
 using UnityEngine;
 //using MaskTransitions;
 using EasyTransition;
+using DarkTonic.MasterAudio;
+
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -57,8 +59,10 @@ public class PlayerHealth : MonoBehaviour
         playerController.inputEnabled = false;
         RotateToFaceCameraInstant();
         preHasFinishedDiedAnim = true;
+        MasterAudio.PlaySound("Dead1");
+
         // normalizedTime = 1.0 means the animation has finished one full loop
-        
+
     }
 
     public bool IsDead()
