@@ -18,6 +18,7 @@ public class GuardAttack : MonoBehaviour
     private NavMeshAgent agent;
     private float lastAttackTime;
     private PlayerHealth health;
+    private bool isChasing;
 
 
     // Start is called before the first frame update
@@ -35,6 +36,14 @@ public class GuardAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (guardMovement.currentState == GuardMovement.State.Chasing)
+        {
+            isChasing = true;
+        }
+        else
+        {
+            isChasing = false;
+        }
         //Comprobamos que esten todos los componentes necesarios
         if (guardMovement == null || guardMovement.player == null || health == null)
             return;
@@ -75,6 +84,7 @@ public class GuardAttack : MonoBehaviour
                 PlayerHealth h = col.GetComponent<PlayerHealth>();
                 if(h != null)
                 {
+                    if(isChasing)
                     health.TakeDamage(attackDamage);
                 }
             }

@@ -9,6 +9,7 @@ using LevelLocker;
 using EasyTransition;
 public class DetectItems : MonoBehaviour
 {
+    private Transform auxGameObject;
     private bool grabInRange = false;
     private bool waitForE = false;
     private bool isAdded;
@@ -18,6 +19,7 @@ public class DetectItems : MonoBehaviour
     private bool isVanishing;
     private bool canEraseVanish;
     private ItemStatsContainer ItemStats;
+    public PlayerController playerController;
 
     //public DeadCamCulling player;
 
@@ -72,6 +74,8 @@ public class DetectItems : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(waitForE);
+       // Debug.Log(accionEjecutada);
         //Debug.Log(LevelLocker.VariablesGlobales._leaveTut);
         FadeManager();
         // If we are on cooldown, update the timer
@@ -94,7 +98,8 @@ public class DetectItems : MonoBehaviour
                 TypeBarco();
                 break;
 
-            case "Chest":
+            case "Patada":
+                TypeKick();
                 break;
 
             case "NPC":
@@ -169,9 +174,7 @@ public class DetectItems : MonoBehaviour
                         accionEjecutada = true;
                         AnimationHandlerOut();
 
-                        //VFX
-                        if (spawnEffect != null)
-                            spawnEffect.SpawnParticle();
+                        SpawnVFX();
 
                     }
                 }
@@ -183,7 +186,41 @@ public class DetectItems : MonoBehaviour
         }
     }
 
-   
+    public void TypeKick()
+    {
+        if (waitForE && Input.GetKey(grabItemKey) && !accionEjecutada)
+        {
+            StartCoroutine(PlayAndWaitForAnimation());
+            accionEjecutada = true; // Bloqueamos la acción para evitar repeticiones
+            auxGameObject.gameObject.SetActive(false); 
+        }
+    }
+
+    private IEnumerator PlayAndWaitForAnimation()
+    {
+        // Desactivamos el input antes de empezar
+        playerController.inputEnabled = false;
+
+        // Disparamos la animación
+        Animations.AnimatorManager.myAnimator.SetBool("patada", true);
+
+        // Esperamos a que la animación realmente comience
+        yield return new WaitUntil(() =>
+            Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Patada"));
+
+        // Esperamos a que termine (normalizedTime >= 1f)
+        yield return new WaitUntil(() =>
+            Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        // Rehabilitamos el input y dejamos la animación
+        Animations.AnimatorManager.myAnimator.SetBool("patada", false);
+        accionEjecutada = false;
+        playerController.inputEnabled = true;
+
+       // Debug.Log("Animación de patada terminada");
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         objectTag = other.tag;
@@ -200,7 +237,8 @@ public class DetectItems : MonoBehaviour
                 OnEnterShip(other);
                 break;
 
-            case "Chest":
+            case "Patada":
+                OnEnterKick(other);
                 break;
 
             case "NPC":
@@ -235,6 +273,13 @@ public class DetectItems : MonoBehaviour
             CooldownHandler();
         }
     }
+
+    private void OnEnterKick(Collider other)
+    {
+        auxGameObject = other.transform.Find("help");
+        waitForE = true;
+    }
+
     /*** TRIGGER EXIT ***/
     private void OnTriggerExit(Collider other)
     {
@@ -268,6 +313,7 @@ public class DetectItems : MonoBehaviour
             }
             else return;
         }
+        if (other.tag == "Patada") return;
         MakeSmaller(other);
 
     }
@@ -367,8 +413,7 @@ public class DetectItems : MonoBehaviour
         // Wait until itemVanish is true
         yield return new WaitUntil(() => itemVanish);
 
-        if (spawnEffect != null)
-            spawnEffect.SpawnParticle();
+        SpawnVFX();
         itemObj.SetActive(false);
         itemVanish = false;
         isVanishing = false;
@@ -431,6 +476,7 @@ public class DetectItems : MonoBehaviour
                 Animations.AnimatorManager.myAnimator.SetBool("grabBig", true);
                 break;
             case "BARCO":
+                Animations.AnimatorManager.myAnimator.SetBool("grabSmall", true);
                 segundosNecesarios = 1.6f;
                 break;
             default:
@@ -475,6 +521,13 @@ public class DetectItems : MonoBehaviour
     public void GoToLevelSelect()
     {
         TransitionManager.Instance().Transition("LevelSelect", transition, 0f);
+    }
+
+    public void SpawnVFX()
+    {
+        //VFX
+        if (spawnEffect != null)
+            spawnEffect.SpawnParticle();
     }
 
     /***DEBUG

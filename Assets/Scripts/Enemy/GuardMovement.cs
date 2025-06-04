@@ -38,14 +38,14 @@ public class GuardMovement : MonoBehaviour
     public bool lookAtDuringPatrol;
     public Transform lookAtTarget;
 
-    private enum State
+    public enum State
     {
         Patrolling,
         Stopping,
         Chasing,
     }
 
-    private State currentState = State.Patrolling;
+    public State currentState = State.Patrolling;
 
 
     // Start is called before the first frame update

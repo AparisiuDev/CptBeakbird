@@ -6,6 +6,7 @@ public class ItemStatsContainer : MonoBehaviour
 {
     public ItemStats ItemStats;
     public Vector3 og_scale;
+    public bool notGrabbable;
 
    
     [Header("Names and Description")]
