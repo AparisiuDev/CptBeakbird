@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class CallEffects : MonoBehaviour
 {
+    private bool alreadyAddedWhale = false;
     [SerializeField] private ParticleSystem targetParticles;
     [SerializeField] private GameObject sand;
+    [SerializeField] private AddHapVal addSat;
+    [SerializeField] private ItemStatsContainer sandVAL;
+
     public Transform spawnPoint;      // Optional: where to spawn the particles
     private Vector3 position;
 
     public void Start()
     {
         position = spawnPoint != null ? spawnPoint.position : transform.position;
-
+        sandVAL = addSat.gameObject.GetComponent<ItemStatsContainer>();
     }
     // Called via Animation Event
     public void WakeUp()
@@ -40,10 +45,13 @@ public class CallEffects : MonoBehaviour
 
     public void CallVFX()
     {
-        Debug.Log("CallVFX");
+        //Debug.Log("CallVFX");
         //VFX
         if (sand != null)
         Instantiate(sand, position, Quaternion.identity);
+        if (alreadyAddedWhale) return;
+        addSat.AddValues(sandVAL.Satisfaction, sandVAL.Price); // Adjust values as needed
+        alreadyAddedWhale = true; // Ensure this is only called once
 
     }
 }
