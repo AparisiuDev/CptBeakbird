@@ -10,6 +10,8 @@ public class FoxMovement : MonoBehaviour
     [Header("Declaromg stuff")]
 
     private VisionConicaTower visionConicaTower;
+    public float visionConicaAux;
+
     public Transform player;
     public Animator Animator;
     public ParticleSystem sawPlayerVFX;
@@ -68,6 +70,8 @@ public class FoxMovement : MonoBehaviour
         agent.isStopped = true; // No queremos que camine hasta que sea necesario
 
         LookAtTarget(graffitiTarget);
+        visionConicaAux = visionConicaTower.distanciaVision;
+
     }
 
     // Update is called once per frame
@@ -77,12 +81,15 @@ public class FoxMovement : MonoBehaviour
         {
             case State.Patrolling:
                 Patrol();
+                visionConicaTower.distanciaVision = visionConicaAux;
                 break;
             case State.Stopping:
                 StopAndObserve();
                 break;
             case State.Chasing:
                 Chase();
+                visionConicaTower.distanciaVision = visionConicaAux / 1.5f;
+
                 break;
         }
     }

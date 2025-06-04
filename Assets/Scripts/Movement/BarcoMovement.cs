@@ -56,7 +56,7 @@ public class BarcoMovement : MonoBehaviour
 
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
-            if (moveInput <= 0) return;
+            if (moveInput <= 0 && turnInput == 0) return;
             remador.SetBool("remar", true);
             remoIZQ.SetBool("remar", true);
             remoDER.SetBool("remar", true);

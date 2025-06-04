@@ -188,6 +188,7 @@ public class DetectItems : MonoBehaviour
     {
         objectTag = other.tag;
         typeOfCollider = other;
+        spawnEffect = null;
         if (other.GetComponent<SpawnParticleEffect>() != null) spawnEffect = other.GetComponent<SpawnParticleEffect>();
         // Logic for type of interactions
         switch (objectTag)
@@ -257,7 +258,7 @@ public class DetectItems : MonoBehaviour
         Animations.AnimatorManager.myAnimator.SetBool("grabMid", false);
         Animations.AnimatorManager.myAnimator.SetBool("grabBig", false);
         //VFX
-        spawnEffect = null;
+        //spawnEffect = null;
         // Hacer pequeño el item y el barco solo si se ha pasado
         if (other.tag == "Barco" )
         {
