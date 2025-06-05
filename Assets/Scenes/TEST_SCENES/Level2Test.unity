@@ -18372,7 +18372,7 @@ MonoBehaviour:
   Name: 
   Description: 
   Price: 0
-  Satisfaction: 0
+  Satisfaction: 50
   timeToGrab: 0
   size: 
   Model: {fileID: 0}
