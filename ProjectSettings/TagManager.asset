@@ -12,6 +12,7 @@ TagManager:
   - Tutorial
   - Barco
   - Patada
+  - Saludo
   layers:
   - Default
   - TransparentFX

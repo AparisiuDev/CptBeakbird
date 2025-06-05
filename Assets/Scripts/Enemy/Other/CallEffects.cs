@@ -7,10 +7,13 @@ using UnityEngine.UIElements;
 public class CallEffects : MonoBehaviour
 {
     private bool alreadyAddedWhale = false;
+    private bool alreadySaidHi = false;
     [SerializeField] private ParticleSystem targetParticles;
     [SerializeField] private GameObject sand;
     [SerializeField] private AddHapVal addSat;
+    [SerializeField] private AddHapVal addSatHello;
     [SerializeField] private ItemStatsContainer sandVAL;
+    [SerializeField] private ItemStatsContainer helloVAL;
 
     public Transform spawnPoint;      // Optional: where to spawn the particles
     private Vector3 position;
@@ -18,7 +21,10 @@ public class CallEffects : MonoBehaviour
     public void Start()
     {
         position = spawnPoint != null ? spawnPoint.position : transform.position;
-        sandVAL = addSat.gameObject.GetComponent<ItemStatsContainer>();
+        if (addSat != null )
+            sandVAL = addSat.gameObject.GetComponent<ItemStatsContainer>();
+        if(addSatHello != null)
+            helloVAL = addSatHello.gameObject.GetComponent<ItemStatsContainer>();
     }
     // Called via Animation Event
     public void WakeUp()
@@ -52,6 +58,15 @@ public class CallEffects : MonoBehaviour
         if (alreadyAddedWhale) return;
         addSat.AddValues(sandVAL.Satisfaction, sandVAL.Price); // Adjust values as needed
         alreadyAddedWhale = true; // Ensure this is only called once
+
+    }
+
+    public void Saludo()
+    {
+        Debug.Log("YOLOOOOOOOOOOOO");
+        if (alreadySaidHi) return;
+        addSat.AddValues(helloVAL.Satisfaction, helloVAL.Price); // Adjust values as needed
+        alreadySaidHi = true; // Ensure this is only called once
 
     }
 }

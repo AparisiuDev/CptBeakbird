@@ -102,8 +102,10 @@ public class DetectItems : MonoBehaviour
                 TypeKick();
                 break;
 
-            case "NPC":
+            case "Saludo":
+                TypeHello();
                 break;
+
 
             default:
                 break;
@@ -220,6 +222,41 @@ public class DetectItems : MonoBehaviour
        // Debug.Log("Animación de patada terminada");
     }
 
+    public void TypeHello()
+    {
+        if (waitForE && Input.GetKey(grabItemKey) && !accionEjecutada)
+        {
+            StartCoroutine(PlayAndWaitForAnimationHello());
+            accionEjecutada = true; // Bloqueamos la acción para evitar repeticiones
+            auxGameObject.gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator PlayAndWaitForAnimationHello()
+    {
+        // Desactivamos el input antes de empezar
+        playerController.inputEnabled = false;
+
+        // Disparamos la animación
+        Animations.AnimatorManager.myAnimator.SetBool("saludo", true);
+
+        // Esperamos a que la animación realmente comience
+        yield return new WaitUntil(() =>
+            Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Saludar"));
+
+        // Esperamos a que termine (normalizedTime >= 1f)
+        yield return new WaitUntil(() =>
+            Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        // Rehabilitamos el input y dejamos la animación
+        Animations.AnimatorManager.myAnimator.SetBool("saludo", false);
+        accionEjecutada = false;
+        playerController.inputEnabled = true;
+
+        // Debug.Log("Animación de patada terminada");
+    }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -241,7 +278,8 @@ public class DetectItems : MonoBehaviour
                 OnEnterKick(other);
                 break;
 
-            case "NPC":
+            case "Saludo":
+                OnEnterSaludo(other);
                 break;
 
             default:
@@ -280,6 +318,14 @@ public class DetectItems : MonoBehaviour
         waitForE = true;
     }
 
+    private void OnEnterSaludo(Collider other)
+    {
+        auxGameObject = other.transform.Find("help");
+        waitForE = true;
+    }
+
+
+
     /*** TRIGGER EXIT ***/
     private void OnTriggerExit(Collider other)
     {
@@ -314,6 +360,7 @@ public class DetectItems : MonoBehaviour
             else return;
         }
         if (other.tag == "Patada") return;
+        if (other.tag == "Saludo") return;
         MakeSmaller(other);
 
     }
@@ -479,6 +526,7 @@ public class DetectItems : MonoBehaviour
                 Animations.AnimatorManager.myAnimator.SetBool("grabSmall", true);
                 segundosNecesarios = 1.6f;
                 break;
+
             default:
                 break;
         }
