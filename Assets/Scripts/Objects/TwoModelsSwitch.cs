@@ -48,7 +48,8 @@ public class TwoModelsSwitch : MonoBehaviour
             Destroy(particula, ps.main.duration + ps.main.startLifetime.constantMax);
         }
         addHapVal.AddValues(itemStatsContainer.ItemStats.Satisfaction, itemStatsContainer.ItemStats.Price);
-        Destroy(gameObject);
+       // Destroy(gameObject);
+        gameObject.SetActive(false); // Desactiva el objeto original
     }
 
 }

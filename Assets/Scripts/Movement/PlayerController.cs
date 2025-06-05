@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [Header("SFX Manager")]
     public GaviotoSFXManager sounds;
     private bool isWalking;
+    private bool isRunning;
 
     private void Start()
     {
@@ -95,6 +96,9 @@ public class PlayerController : MonoBehaviour
         ExtraIdleExitCheck();
         if (!isSprinting && horizontalMove != Vector3.zero)
         {
+            isRunning = false;
+            MasterAudio.StopAllOfSound("Correr");
+
             Animations.AnimatorManager.myAnimator.SetBool("isWalking", true);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", false);
             ExitIdle();
@@ -106,10 +110,15 @@ public class PlayerController : MonoBehaviour
         }
         if (isSprinting && horizontalMove != Vector3.zero)
         {
-
+            isWalking = false;
+            MasterAudio.StopAllOfSound("Caminar");
             //Animations.AnimatorManager.myAnimator.SetBool("isWalking", false);
             Animations.AnimatorManager.myAnimator.SetBool("isRunning", true);
             ExitIdle();
+
+            if (!isRunning) // Play sound only if not already walking
+                MasterAudio.PlaySound("Correr");
+            isRunning = true;
 
         }
         else if (horizontalMove == Vector3.zero)
@@ -120,7 +129,11 @@ public class PlayerController : MonoBehaviour
             // SOUNDS //
             //sounds.IdleSFX();
             MasterAudio.StopAllOfSound("Caminar");
+            MasterAudio.StopAllOfSound("Correr");
+
             isWalking = false;
+            isRunning = false;
+
         }
 
         // Apply gravity

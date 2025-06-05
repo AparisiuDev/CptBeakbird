@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
+using DarkTonic.MasterAudio;
+
 
 
 public class GuardMovement : MonoBehaviour
@@ -149,6 +151,7 @@ public class GuardMovement : MonoBehaviour
             if(stopTimer >= stopDuration)
             {
                 sawPlayerVFX.Play();
+                MasterAudio.PlaySound("Alert");
                 currentState = State.Chasing;
                 agent.isStopped = false;
                 timeSinceLastSeen = Time.time;
