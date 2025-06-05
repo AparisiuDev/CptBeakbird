@@ -10015,7 +10015,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: cf5e3e782af988343a9761ff1611ef6e, type: 3}
   m_Resource: {fileID: 8300000, guid: cf5e3e782af988343a9761ff1611ef6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.11091747
+  m_Volume: 0.03981072
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -16966,7 +16966,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 8829
+  frames: 9391
 --- !u!1001 &1002497744
 PrefabInstance:
   m_ObjectHideFlags: 0
