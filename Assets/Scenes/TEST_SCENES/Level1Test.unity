@@ -39412,6 +39412,10 @@ PrefabInstance:
       propertyPath: graffitiTarget
       value: 
       objectReference: {fileID: 559727488}
+    - target: {fileID: 7638391937446995417, guid: 0fb6f7d33d9cc434cac2ae37768de556, type: 3}
+      propertyPath: offsetInterval2
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 8783472428498853127, guid: 0fb6f7d33d9cc434cac2ae37768de556, type: 3}
       propertyPath: player
       value: 
