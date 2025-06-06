@@ -75,7 +75,7 @@ public class DetectItems : MonoBehaviour
     private void Update()
     {
         //Debug.Log(waitForE);
-       // Debug.Log(accionEjecutada);
+        Debug.Log(accionEjecutada);
         //Debug.Log(LevelLocker.VariablesGlobales._leaveTut);
         FadeManager();
         // If we are on cooldown, update the timer
@@ -145,6 +145,7 @@ public class DetectItems : MonoBehaviour
                         AnimationHandlerOut();
                         
                     }
+                    
                 }
             }
         }
@@ -404,6 +405,7 @@ public class DetectItems : MonoBehaviour
             StartCoroutine(WaitAndVanish());
 
         }
+
     }
 
     // Checkear si te el tag "Items" quan esta en rango

@@ -63,7 +63,7 @@ public class CallEffects : MonoBehaviour
 
     public void Saludo()
     {
-        Debug.Log("YOLOOOOOOOOOOOO");
+        //Debug.Log("YOLOOOOOOOOOOOO");
         if (alreadySaidHi) return;
         addSat.AddValues(helloVAL.Satisfaction, helloVAL.Price); // Adjust values as needed
         alreadySaidHi = true; // Ensure this is only called once
