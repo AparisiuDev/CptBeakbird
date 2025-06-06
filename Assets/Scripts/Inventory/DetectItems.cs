@@ -264,6 +264,8 @@ public class DetectItems : MonoBehaviour
         objectTag = other.tag;
         typeOfCollider = other;
         spawnEffect = null;
+        tiempoPresionado = 0f; // Reset the timer when entering a new trigger
+        //accionEjecutada = false;
         if (other.GetComponent<SpawnParticleEffect>() != null) spawnEffect = other.GetComponent<SpawnParticleEffect>();
         // Logic for type of interactions
         switch (objectTag)
@@ -300,6 +302,7 @@ public class DetectItems : MonoBehaviour
             SeeItemStats(other);
             waitForE = true;
             CooldownHandler();
+            accionEjecutada = false;
         }
     }
     private void OnEnterShip(Collider other)
@@ -374,6 +377,7 @@ public class DetectItems : MonoBehaviour
         waitForE = false;
         itemObj = null;
         ItemStats = null;
+        accionEjecutada = false;
     }
 
     /*** OTHER LOGIC ***/
@@ -467,6 +471,7 @@ public class DetectItems : MonoBehaviour
         itemVanish = false;
         isVanishing = false;
         canEraseVanish = true;
+
     }
 
     private void justStolenItem(float duration)
@@ -550,6 +555,7 @@ public class DetectItems : MonoBehaviour
         Animations.AnimatorManager.myAnimator.SetBool("grabSmall", false);
         Animations.AnimatorManager.myAnimator.SetBool("grabMid", false);
         Animations.AnimatorManager.myAnimator.SetBool("grabBig", false);
+
 
 
     }
