@@ -24,7 +24,7 @@ Material:
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _LightContribution
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -69,8 +69,8 @@ Material:
     - _WaveNoise: 0.25
     - _WaveSpeed: 0.5
     m_Colors:
-    - _ColorDeep: {r: 0.58431375, g: 0.7764706, b: 0.8490566, a: 1}
-    - _ColorShallow: {r: 0.35, g: 0.6, b: 0.75, a: 0.8}
+    - _ColorDeep: {r: 0.252759, g: 0.7057258, b: 0.754717, a: 1}
+    - _ColorShallow: {r: 0.16571736, g: 0.5140855, b: 0.7169812, a: 0.8}
     - _CrestColor: {r: 1, g: 1, b: 1, a: 0.9}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
