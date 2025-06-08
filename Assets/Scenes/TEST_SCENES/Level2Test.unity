@@ -21193,7 +21193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: Satisfaction
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4592881494584192719, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: m_Size.x
@@ -67403,7 +67403,7 @@ MonoBehaviour:
   Name: 
   Description: 
   Price: 0
-  Satisfaction: 20
+  Satisfaction: 25
   timeToGrab: 0
   size: 
   Model: {fileID: 0}
@@ -68987,7 +68987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 964862594970909128, guid: e4a8f51a5d815de4289a9ff48124ceba, type: 3}
       propertyPath: Satisfaction
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1592362770734692023, guid: e4a8f51a5d815de4289a9ff48124ceba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -86468,7 +86468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 964862594970909128, guid: e4a8f51a5d815de4289a9ff48124ceba, type: 3}
       propertyPath: Satisfaction
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1592362770734692023, guid: e4a8f51a5d815de4289a9ff48124ceba, type: 3}
       propertyPath: m_LocalPosition.x
