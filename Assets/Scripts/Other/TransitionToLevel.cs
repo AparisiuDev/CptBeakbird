@@ -24,7 +24,7 @@ public class TransitionToLevel : MonoBehaviour
         }
     }
 
-    void OnFramesRemainingReached()
+    public void OnFramesRemainingReached()
     {
         TransitionManager.Instance().Transition(SceneToTransition, transition, 0f);
     }

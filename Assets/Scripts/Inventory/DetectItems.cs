@@ -10,6 +10,7 @@ using EasyTransition;
 public class DetectItems : MonoBehaviour
 {
     private Transform auxGameObject;
+    private Transform auxGameObject2;
     private bool grabInRange = false;
     private bool waitForE = false;
     private bool isAdded;
@@ -55,6 +56,10 @@ public class DetectItems : MonoBehaviour
     // Saco
     public float addSpeed = 1f; // velocidad del suavizado
 
+    //BUGFIXING
+    private float accionTimer = 0f;
+    private float accionDuracion = 2f;
+
 
     private string objectTag;
     private Collider typeOfCollider;
@@ -88,6 +93,8 @@ public class DetectItems : MonoBehaviour
             canEnter = true; // Allow OnTriggerEnter again after cooldown
         }
 
+        accionEjecutadaFix();
+
         switch (objectTag)
         {
             case "Items":
@@ -106,6 +113,9 @@ public class DetectItems : MonoBehaviour
                 TypeHello();
                 break;
 
+            case "Cartel":
+                TypeCartel();
+                break;
 
             default:
                 break;
@@ -257,6 +267,40 @@ public class DetectItems : MonoBehaviour
         // Debug.Log("Animación de patada terminada");
     }
 
+    public void TypeCartel()
+    {
+        if (waitForE && Input.GetKey(grabItemKey) && !accionEjecutada)
+        {
+            StartCoroutine(PlayAndWaitForAnimationCartel());
+            accionEjecutada = true; // Bloqueamos la acción para evitar repeticiones
+            auxGameObject.gameObject.SetActive(false);
+            auxGameObject2.gameObject.GetComponent<SpinCartel>().StartRotationSequence();
+        }
+    }
+
+    private IEnumerator PlayAndWaitForAnimationCartel()
+    {
+        // Desactivamos el input antes de empezar
+        playerController.inputEnabled = false;
+
+        // Disparamos la animación
+        Animations.AnimatorManager.myAnimator.SetBool("patada", true);
+
+        // Esperamos a que la animación realmente comience
+        yield return new WaitUntil(() =>
+            Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Patada"));
+
+        // Esperamos a que termine (normalizedTime >= 1f)
+        yield return new WaitUntil(() =>
+            Animations.AnimatorManager.myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        // Rehabilitamos el input y dejamos la animación
+        Animations.AnimatorManager.myAnimator.SetBool("patada", false);
+        accionEjecutada = false;
+        playerController.inputEnabled = true;
+
+        // Debug.Log("Animación de patada terminada");
+    }
 
 
     private void OnTriggerEnter(Collider other)
@@ -280,11 +324,12 @@ public class DetectItems : MonoBehaviour
             case "Patada":
                 OnEnterKick(other);
                 break;
-
             case "Saludo":
                 OnEnterSaludo(other);
                 break;
-
+            case "Cartel":
+                OnEnterCartel(other);
+                break;
             default:
                 break;
         }
@@ -328,6 +373,14 @@ public class DetectItems : MonoBehaviour
         waitForE = true;
     }
 
+    private void OnEnterCartel(Collider other)
+    {
+        Debug.Log("meow");
+        auxGameObject = other.transform.Find("help");
+        auxGameObject2 = other.transform;
+        waitForE = true;
+    }
+
 
 
     /*** TRIGGER EXIT ***/
@@ -365,6 +418,7 @@ public class DetectItems : MonoBehaviour
         }
         if (other.tag == "Patada") return;
         if (other.tag == "Saludo") return;
+        if (other.tag == "Cartel") return;
         MakeSmaller(other);
 
     }
@@ -586,6 +640,20 @@ public class DetectItems : MonoBehaviour
             spawnEffect.SpawnParticle();
     }
 
+    private void accionEjecutadaFix()
+    {
+        if (accionEjecutada)
+        {
+            accionTimer += Time.deltaTime;
+
+            if (accionTimer >= accionDuracion)
+            {
+                accionEjecutada = false;
+                accionTimer = 0f;
+                Debug.Log("acción desactivada automáticamente tras 2 segundos.");
+            }
+        }
+    }
     /***DEBUG
     private GUIStyle estilo;
     void OnGUI()

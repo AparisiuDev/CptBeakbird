@@ -17258,7 +17258,7 @@ Transform:
   m_GameObject: {fileID: 868994570}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3592639, y: 0, z: 0, w: 0.933236}
-  m_LocalPosition: {x: -14.58, y: -4.7500124, z: 14.670267}
+  m_LocalPosition: {x: -14.58, y: -4.9130125, z: 14.670267}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23764,7 +23764,7 @@ MonoBehaviour:
   lootValue: 0
   phaseCurrent: 0
   fillSpeed: 2
-  timerDuration: 200
+  timerDuration: 360
   health: {fileID: 3454379841467590447}
   timer: {fileID: 241902171}
   darkness: 0.5
@@ -35905,7 +35905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 667108200842190478, guid: 1635e68ad172dc8499ca495817f76226, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.7500124
+      value: -4.9130125
       objectReference: {fileID: 0}
     - target: {fileID: 667108200842190478, guid: 1635e68ad172dc8499ca495817f76226, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38873,7 +38873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3323485868075576691, guid: 9cfc76470d1e88a4abf77a8756d80cf7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.92
+      value: -10.083
       objectReference: {fileID: 0}
     - target: {fileID: 3323485868075576691, guid: 9cfc76470d1e88a4abf77a8756d80cf7, type: 3}
       propertyPath: m_LocalPosition.z

@@ -13,6 +13,7 @@ TagManager:
   - Barco
   - Patada
   - Saludo
+  - Cartel
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &191355169377900188
+--- !u!1001 &9117537821503744360
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e212adbc02270d64e94b6a2be321d56a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.801792
+      value: -34.09923
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e212adbc02270d64e94b6a2be321d56a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.142457
+      value: -9.5281
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e212adbc02270d64e94b6a2be321d56a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 58.555107
+      value: 33.90061
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e212adbc02270d64e94b6a2be321d56a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5ac53d3598c1a9b478ef3e46f1262665, type: 2}
     - target: {fileID: 919132149155446097, guid: e212adbc02270d64e94b6a2be321d56a, type: 3}
       propertyPath: m_Name
-      value: Cigarro
+      value: cigarro
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
