@@ -39,7 +39,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMode: 0
-    - _CrestSharpness: 0.1
+    - _CrestSharpness: 0.014
     - _CrestSize: 1
     - _FadeDistance: 0.5
     - _FoamAmount: 0.25
@@ -47,19 +47,19 @@ Material:
     - _FoamDirection: 0
     - _FoamMode: 2
     - _FoamNoiseAmount: 1
-    - _FoamScale: 0.1
-    - _FoamSharpness: 0.539
+    - _FoamScale: 0.09
+    - _FoamSharpness: 0.561
     - _FoamSpeed: 0.1
     - _FoamStretchX: 1
     - _FoamStretchY: 1
-    - _LightContribution: 0
+    - _LightContribution: 1
     - _Opaque: 0
     - _QueueOffset: -1
     - _RefractionAmplitude: 0.01
     - _RefractionFrequency: 35
     - _RefractionScale: 1
     - _RefractionSpeed: 0.1
-    - _ShadowStrength: 0.35
+    - _ShadowStrength: 1
     - _WaterClearness: 0.3
     - _WaterDepth: 5
     - _WaveAmplitude: 0.2
@@ -69,8 +69,8 @@ Material:
     - _WaveNoise: 0.25
     - _WaveSpeed: 0.5
     m_Colors:
-    - _ColorDeep: {r: 0.252759, g: 0.7057258, b: 0.754717, a: 1}
-    - _ColorShallow: {r: 0.16571736, g: 0.5140855, b: 0.7169812, a: 0.8}
+    - _ColorDeep: {r: 0.2216981, g: 0.5411725, b: 0.8867924, a: 1}
+    - _ColorShallow: {r: 0.18431371, g: 0.39000306, b: 0.83137256, a: 0.8}
     - _CrestColor: {r: 1, g: 1, b: 1, a: 0.9}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
