@@ -33996,7 +33996,7 @@ PrefabInstance:
     - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: Model3D
       value: 
-      objectReference: {fileID: 32900000, guid: f0a1c6002bf8a404784346d6790d1756, type: 3}
+      objectReference: {fileID: 32900000, guid: 09366deb9ef343a4182b8d5e5279b15e, type: 3}
     - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: timeToGrab
       value: 1.5
@@ -34237,6 +34237,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6430460049229822042, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430460049229822042, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6835725471755535929, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
       propertyPath: rawImage
       value: 
@@ -34269,6 +34277,22 @@ PrefabInstance:
       propertyPath: renderTexture
       value: 
       objectReference: {fileID: 8400000, guid: 6c9d0f7d5ade8514bbc91b27d2f82694, type: 2}
+    - target: {fileID: 7587333157353665142, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587333157353665142, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587333157353665142, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587333157353665142, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7754258665196425194, guid: bcfe296f35bfb33418bbafe7ea063be1, type: 3}
       propertyPath: rawImage
       value: 

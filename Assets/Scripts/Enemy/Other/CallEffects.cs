@@ -14,6 +14,8 @@ public class CallEffects : MonoBehaviour
     [SerializeField] private AddHapVal addSatHello;
     [SerializeField] private ItemStatsContainer sandVAL;
     [SerializeField] private ItemStatsContainer helloVAL;
+    public GameObject ballena;
+    public Material ojosCerrados;
 
     public Transform spawnPoint;      // Optional: where to spawn the particles
     private Vector3 position;
@@ -67,6 +69,13 @@ public class CallEffects : MonoBehaviour
         if (alreadySaidHi) return;
         addSat.AddValues(helloVAL.Satisfaction, helloVAL.Price); // Adjust values as needed
         alreadySaidHi = true; // Ensure this is only called once
+
+    }
+
+    public void ChangeWhale()
+    {
+
+        ballena.GetComponent<Renderer>().material = ojosCerrados;
 
     }
 }
