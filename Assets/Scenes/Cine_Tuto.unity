@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 756468790}
   transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
-  SceneToTransition: Level1Test
+  SceneToTransition: Intro_Tuto
   framesBeforeEnd: 10
 --- !u!4 &283005026
 Transform:
@@ -819,7 +819,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756468789}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: da55ce4926a2aef48b6bb95d5bef1395, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: c971e23e1daa2784883f9fc4bbc4af5f, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1561,7 +1561,7 @@ RectTransform:
   m_GameObject: {fileID: 1312625279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.67295, y: 0.67295, z: 0.67295}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 888941036}
@@ -1641,7 +1641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

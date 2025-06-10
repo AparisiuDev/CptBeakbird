@@ -80,7 +80,7 @@ public class DetectItems : MonoBehaviour
     private void Update()
     {
         //Debug.Log(waitForE);
-        Debug.Log(accionEjecutada);
+        //Debug.Log(accionEjecutada);
         //Debug.Log(LevelLocker.VariablesGlobales._leaveTut);
         FadeManager();
         // If we are on cooldown, update the timer

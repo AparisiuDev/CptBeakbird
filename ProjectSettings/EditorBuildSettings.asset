@@ -23,5 +23,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TEST_SCENES/Level3Test.unity
     guid: 4c99a12bd9288154d84b0df679bd9964
+  - enabled: 1
+    path: Assets/Scenes/Intro_Tuto.unity
+    guid: bf6894898539b5f459f9d37de0af74e3
+  - enabled: 1
+    path: Assets/Scenes/Tropi_Tuto.unity
+    guid: b53795923045178468ac50497a87236f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

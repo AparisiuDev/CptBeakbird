@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class ItemStatsContainer : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class ItemStatsContainer : MonoBehaviour
     public string size;
     [Header("Model")]
     public Sprite Model;
+    public VideoClip Model3D;
+
 
     private void Start()
     {
@@ -33,7 +36,9 @@ public class ItemStatsContainer : MonoBehaviour
             Price = Price,
             Satisfaction = Satisfaction,
             size = size,
-            Model = Model
+            Model = Model,
+            Model3D = Model3D
+
         };
 
     }

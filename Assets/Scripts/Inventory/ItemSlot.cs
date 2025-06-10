@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
+using Unity.VisualScripting;
 
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
@@ -18,13 +20,17 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     //[SerializeField] private TMP_Text descriptionText;
 
     // =========== ITEM SLOT DESCRIPTION ================ //
-    public Image itemDescriptionImage;
+    public VideoPlayer MODEL3D_PLAYER;
     public TMP_Text ItemDescriptionName;
     public TMP_Text ItemDescriptionDescription;
 
-    [SerializeField] Image itemModel;
+    public Image itemModel;
+    public VideoClip itemModel3D;
     public GameObject selectedShader;
     public bool thisItemSelected;
+
+    public RawImage rawImage;
+    public RenderTexture renderTexture;
 
     private InventoryManager inventoryManager;
 
@@ -32,11 +38,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
     }
-    public void AddItem(string Name, string Description, Sprite Model)
+    public void AddItem(string Name, string Description, Sprite Model, VideoClip Model3D)
     {
         this.itemName = Name;
         this.description = Description;
         this.model = Model;
+        itemModel3D = Model3D;
         isFull = true;
 
         itemModel.sprite = Model;
@@ -58,17 +65,23 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnLeftClick()
     {
+        rawImage.gameObject.SetActive(true);
         inventoryManager.DeselectAllSlots();
         selectedShader.SetActive(true);
         thisItemSelected = true;
-        itemDescriptionImage.sprite = model;
+        MODEL3D_PLAYER.clip = itemModel3D;
+        rawImage.texture = renderTexture;
         ItemDescriptionName.text = itemName;
         ItemDescriptionDescription.text = description;
     }
     public void OnRightClick()
     {
         inventoryManager.DeselectAllSlots();
-        itemDescriptionImage.sprite = null;
+        rawImage.gameObject.SetActive(false);
+        //MODEL3D_PLAYER.clip = null;
+        //MODEL3D_PLAYER.targetTexture = null; // Opcional, si usas RenderTexture
+        //rawImage = null;
+        //renderTexture = null;
         ItemDescriptionName.text = null;
         ItemDescriptionDescription.text = null;
     }

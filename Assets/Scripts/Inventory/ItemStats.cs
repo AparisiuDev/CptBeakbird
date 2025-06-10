@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public struct ItemStats
 {
@@ -16,5 +17,6 @@ public struct ItemStats
 
     [Header("Model")]
     public Sprite Model;
+    public VideoClip Model3D;
 
 }

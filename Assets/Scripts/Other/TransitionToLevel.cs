@@ -9,8 +9,13 @@ public class TransitionToLevel : MonoBehaviour
     public long framesBeforeEnd; // X frames before the end to trigger the function
     private bool hasTriggered = false;
 
+    private void Start()
+    {
+        videoPlayer.loopPointReached += OnVideoEndReached;
+    }
     void Update()
     {
+
         if (videoPlayer.isPlaying && !hasTriggered)
         {
             long totalFrames = (long)videoPlayer.frameCount;
@@ -25,6 +30,11 @@ public class TransitionToLevel : MonoBehaviour
     }
 
     public void OnFramesRemainingReached()
+    {
+        TransitionManager.Instance().Transition(SceneToTransition, transition, 0f);
+    }
+
+    public void OnVideoEndReached(VideoPlayer videoPlayer)
     {
         TransitionManager.Instance().Transition(SceneToTransition, transition, 0f);
     }

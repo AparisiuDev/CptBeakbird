@@ -51,7 +51,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (ItemSlot[i].isFull == false)
             {
-                ItemSlot[i].AddItem(Inventory.instance.backpack[i].Name,Inventory.instance.backpack[i].Description, Inventory.instance.backpack[i].Model);
+                ItemSlot[i].AddItem(Inventory.instance.backpack[i].Name,Inventory.instance.backpack[i].Description, Inventory.instance.backpack[i].Model, Inventory.instance.backpack[i].Model3D);
                 //Inventory.instance.backpack[i].isAdded = true;
                     return;
             }
