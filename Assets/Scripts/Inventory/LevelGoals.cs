@@ -42,6 +42,7 @@ public class LevelGoals : MonoBehaviour
 
     void Start()
     {
+        lootCompleted = false;
         DeclareArrowParameters();
         DeclareTime();
         sceneName = SceneManager.GetActiveScene().name;

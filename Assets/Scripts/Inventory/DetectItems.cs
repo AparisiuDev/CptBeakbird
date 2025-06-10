@@ -167,7 +167,7 @@ public class DetectItems : MonoBehaviour
 
     public void TypeBarco()
     {
-        if (!LevelLocker.VariablesGlobales._leaveTut) return;
+        if (!levelGoals.lootGoalsCompleted) return;
         if (waitForE)
         {
             if (Input.GetKey(grabItemKey))
