@@ -26,11 +26,12 @@ public class PlayerHealth : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
     private void FixedUpdate()
-    {
+    { 
+        /***
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Die();
-        }
+        } ***/
         if (preHasFinishedDiedAnim)
         {
             transitionManager.Transition("LevelSelect", transition, 2.5f);
