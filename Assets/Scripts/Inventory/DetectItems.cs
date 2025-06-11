@@ -271,6 +271,7 @@ public class DetectItems : MonoBehaviour
     {
         if (waitForE && Input.GetKey(grabItemKey) && !accionEjecutada)
         {
+            levelGoals.happiness = 1f;
             StartCoroutine(PlayAndWaitForAnimationCartel());
             accionEjecutada = true; // Bloqueamos la acción para evitar repeticiones
             auxGameObject.gameObject.SetActive(false);
