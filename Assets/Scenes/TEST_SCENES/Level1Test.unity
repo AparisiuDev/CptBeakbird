@@ -33990,6 +33990,10 @@ PrefabInstance:
       value: MID
       objectReference: {fileID: 0}
     - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
+      propertyPath: Model
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d33b2c9bcd5244419742ac1bead2e6b, type: 3}
+    - target: {fileID: 3534104740943718641, guid: 6a005a9bd09a6b744bed5dd9dfe1fde2, type: 3}
       propertyPath: Price
       value: 100
       objectReference: {fileID: 0}

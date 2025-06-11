@@ -8,5 +8,6 @@ public class LevelUnlocker : MonoBehaviour {
     {
         if (LevelLocker.VariablesGlobales._leaveTut == true) LevelLocker.VariablesGlobales._lvl1 = true;
         if (LevelLocker.VariablesGlobales._leave1 == true) LevelLocker.VariablesGlobales._lvl2 = true;
+        if (LevelLocker.VariablesGlobales._leave2 == true) LevelLocker.VariablesGlobales._tapon = true;
     }
 }

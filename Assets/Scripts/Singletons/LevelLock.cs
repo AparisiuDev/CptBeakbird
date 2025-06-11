@@ -9,6 +9,7 @@ namespace LevelLocker
         // Level Lockers
         public static bool _lvl1;
         public static bool _lvl2;
+        public static bool _tapon;
 
         // Can leave levels
         public static bool _leaveTut;

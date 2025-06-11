@@ -14,6 +14,7 @@ TagManager:
   - Patada
   - Saludo
   - Cartel
+  - Tapon
   layers:
   - Default
   - TransparentFX

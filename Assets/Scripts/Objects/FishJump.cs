@@ -18,6 +18,9 @@ public class FishJump : MonoBehaviour
     private float cooldownTimer = 0f;
     private Renderer rend;
 
+    private bool isFirstJump = true;
+    private float firstJumpDelay;
+
     void Start()
     {
         startPos = transform.position;
@@ -26,6 +29,9 @@ public class FishJump : MonoBehaviour
         rend = GetComponent<Renderer>();
         if (rend != null)
             rend.enabled = false;
+
+        // Generar retardo aleatorio para el primer salto (entre 1 y 6 segundos)
+        firstJumpDelay = Random.Range(1f, 6f);
     }
 
     void Update()
@@ -45,7 +51,6 @@ public class FishJump : MonoBehaviour
                     rend.enabled = false;
 
                 SpawnParticlesAtPosition(despawnParticlesPrefab, endPos);
-
                 return;
             }
 
@@ -66,7 +71,9 @@ public class FishJump : MonoBehaviour
         {
             cooldownTimer += Time.deltaTime;
 
-            if (cooldownTimer >= jumpInterval)
+            float targetInterval = isFirstJump ? firstJumpDelay : jumpInterval;
+
+            if (cooldownTimer >= targetInterval)
             {
                 isJumping = true;
                 timer = 0f;
@@ -76,6 +83,8 @@ public class FishJump : MonoBehaviour
                     rend.enabled = true;
 
                 SpawnParticlesAtPosition(spawnParticlesPrefab, transform.position);
+
+                isFirstJump = false; // ya no es el primer salto
             }
         }
     }

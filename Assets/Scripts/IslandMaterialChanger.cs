@@ -25,6 +25,9 @@ public class IslandMaterialChanger : MonoBehaviour
             case "Level2":
                 CambiarMaterial2();
                 break;
+            case "Tapon":
+                CambiarMaterialTapon();
+                break;
             default:
                 break;
         }
@@ -45,6 +48,18 @@ public class IslandMaterialChanger : MonoBehaviour
     void CambiarMaterial2()
     {
         if (LevelLocker.VariablesGlobales._lvl2)
+        {
+            rend.material = materialTrue;
+        }
+        else
+        {
+            rend.material = materialFalse;
+        }
+    }
+
+    void CambiarMaterialTapon()
+    {
+        if (LevelLocker.VariablesGlobales._tapon)
         {
             rend.material = materialTrue;
         }
