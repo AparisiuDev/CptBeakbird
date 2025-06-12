@@ -29,5 +29,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tropi_Tuto.unity
     guid: b53795923045178468ac50497a87236f
+  - enabled: 1
+    path: Assets/Scenes/Disco_Tuto.unity
+    guid: 10bddf3ee491d3a499b3638204385dcd
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: ada0fcc55050b79409cb66488739178b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

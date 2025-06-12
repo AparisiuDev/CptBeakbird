@@ -70,8 +70,14 @@ public class LevelEnterer : MonoBehaviour
 
         if (other.CompareTag("Level2"))
         {
-            level = "Level3Test";
+            level = "Disco_Tuto";
             canEnter = LevelLocker.VariablesGlobales._lvl2;
+        }
+
+        if (other.CompareTag("Tapon"))
+        {
+            level = "Ending";
+            canEnter = LevelLocker.VariablesGlobales._tapon;
         }
 
         return level;
