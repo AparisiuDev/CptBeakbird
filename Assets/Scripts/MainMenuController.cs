@@ -20,13 +20,13 @@ public class MainMenuController : MonoBehaviour
     }
 
     //Boton volver hacia menu
-    public void LeaveButton()
+    public void MainMenuButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        TransitionManager.Instance().Transition("Main_Menu", transition, 0f);
     }
-    public void CreditsEnter()
+    public void LevelSelect()
     {
-        SceneManager.LoadScene("Credits");
+        TransitionManager.Instance().Transition("LevelSelect", transition, 0f);
     }
 
     public void OptionButton()

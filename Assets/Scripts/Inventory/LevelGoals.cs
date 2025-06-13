@@ -102,19 +102,30 @@ public class LevelGoals : MonoBehaviour
 
     void ArrowManager()
     {
-        
         if (arrow != null)
         {
-            // Calcula el ángulo de destino
+            // Calcula el ángulo de destino (entre 0 y -90 grados)
             float targetAngle = (1f - happiness) * 90f;
             targetRotation = Quaternion.Euler(0f, 0f, -targetAngle);
 
             // Interpola suavemente hacia esa rotación
-            rectTransform.localRotation = Quaternion.Lerp(
+            Quaternion newRotation = Quaternion.Lerp(
                 rectTransform.localRotation,
                 targetRotation,
                 Time.deltaTime * rotationSpeed
             );
+
+            // Obtiene el ángulo Z del quaternion interpolado
+            float z = newRotation.eulerAngles.z;
+
+            // Asegura que el ángulo Z no sea mayor a 0
+            if (z > 0f && z < 180f) // Esto evita que de la vuelta completa
+            {
+                z = 0f;
+            }
+
+            // Aplica la rotación corregida
+            rectTransform.localRotation = Quaternion.Euler(0f, 0f, z);
         }
     }
 
